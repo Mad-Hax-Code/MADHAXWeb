@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MAD HAX</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css} "/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/formatting.css} "/>
+    <script async th:src="@{/js/NavMenu.js}"></script>
+    <script async th:src="@{/js/Home.js}"></script>
+</head>
+<body>
+<div id="container">
+    <div th:replace="fragments/header.html :: header"></div>
+    <div id="main">
+        <div class="mainBlockContainer">
+            <div class="mainBlockLeft">
+                <div class="padRight">
+                    <span class="customHeader">Open Source Software</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
+                        cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis
+                        ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum
+                        lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                        inceptos himenaeos. </p>
+
+                    <p>Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque
+                        nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem.
+                        Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis,
+                        luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus,
+                        ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+
+                </div><!-- end padRight -->
+            </div><!-- end mainBlockLeft -->
+            <div class="mainBlockRight">
+                <img style="width:100%;" th:src="@{image/business.jpg}"/>
+            </div>
+        </div><!-- end mainBlockContainer -->
+        <div class="mainBlockContainer">
+            <div class="mainBlockLeft">
+                <img style="width:100%;" th:src="@{image/cloud.jpg}"/>
+            </div><!-- end mainBlockLeft -->
+            <div class="mainBlockRight">
+                <div class="padLeft">
+                    <span class="customHeader">Keep Your Head in the Cloud</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.
+                        Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis
+                        sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa.
+                        Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per
+                        conubia nostra, per inceptos himenaeos. </p>
+
+                    <p>Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque
+                        nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem.
+                        Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis,
+                        luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus
+                        metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum
+                        velit. </p>
+                </div><!-- end padLeft -->
+            </div><!-- end mainBlockRight -->
+        </div><!-- end mainBlockContainer -->
+        <div class="mainBlockContainer">
+            <div class="mainBlockLeft">
+                <div class="padRight">
+                    <span class="customHeader">Join Our Community!</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
+                        cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis
+                        ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum
+                        lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                        inceptos himenaeos. </p>
+
+                    <p>Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque
+                        nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem.
+                        Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis,
+                        luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus,
+                        ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. </p>
+
+                </div><!-- end padRight -->
+            </div><!-- end mainBlockLeft -->
+            <div class="mainBlockRight">
+                <img style="width:100%;" th:src="@{image/community.jpg}"/>
+            </div>
+        </div><!-- end mainBlockContainer -->
+        <div class="clr"></div>
+    </div><!-- end main -->
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div><!-- end container -->
+</body>
+</html>

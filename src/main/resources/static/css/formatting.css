@@ -1,0 +1,27 @@
+.customHeader {
+    font-size:2em;
+    font-weight: bold;
+}
+
+.padLeft {
+    padding:30px 0 0 30px;
+}
+
+.padRight {
+    padding:30px 30px 0 0;
+}
+
+.clr {
+    clear:both;
+}
+
+@media only screen and (max-device-width: 1440px ) {
+
+    .padLeft {
+        padding:0;
+    }
+
+    .padRight {
+        padding:0;
+    }
+}

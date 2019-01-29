@@ -1,0 +1,167 @@
+body {
+    background-color:#000;
+    font-family: sans-serif;
+    padding:0;
+    margin:0;
+    line-height:1.75em;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    text-align: justify;
+}
+
+#container {
+
+}
+
+#masthead {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background-color:#FFF;
+    border-bottom: 1px solid #aaa;
+}
+
+#logoImage {
+    margin-left:3em;
+    height:60px;
+    float:left;
+}
+
+#openBtn {
+    font-size:3em;
+    margin-right:20px;
+    float:right;
+}
+
+#openBtn:hover {
+    cursor: pointer;
+}
+
+#closeBtn {
+    font-size:3em;
+    float:right;
+    margin-right:20px;
+}
+
+#navMenu {
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:0;
+    z-index: 1;
+    background-color:#FFF;
+    overflow-x:hidden;
+    transition:0.5s;
+    text-align: center;
+}
+
+#navMenu a {
+    color:#000;
+    font-size:2em;
+    text-decoration: none;
+    padding:8px;
+    display:block;
+    transition:0.3s;
+}
+
+#navMenu a:hover {
+    color: #e59842;
+}
+
+#main {
+    margin-top:60px;
+    background-color: #FFF;
+    padding:40px;
+}
+
+.mainBlockContainer {
+    background-color:#FFF;
+    padding:0;
+    margin:0;
+    clear:both;
+}
+
+.mainBlockContainer img {
+    border-radius:10px;
+}
+
+.mainBlockLeft {
+    padding:0;
+    margin:0;
+    width:50%;
+    float:left;
+    clear:bottom;
+}
+
+.mainBlockRight {
+    padding:0;
+    margin:0;
+    width:50%;
+    float:right;
+    clear:bottom;
+}
+
+#footerLinks {
+    background-color:#333;
+    color:#555;
+    padding: 20px;
+    text-align:center;
+}
+
+#footerLinks a {
+    color:lightblue;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+#footerLinks a:hover {
+    color:#FFF;
+}
+
+#footer {
+    color: #555;
+    padding:10px;
+    text-align:center;
+}
+
+@media only screen and (max-device-width: 1440px ) {
+    body {
+        font-size:2em;
+    }
+
+    #closeBtn {
+        font-size:5em;
+    }
+
+    #logoImage {
+        height: 100px;
+    }
+
+    #navMenu a {
+        font-size:3em;
+        padding:8px 8px 60px 8px;
+    }
+
+    #main {
+        margin-top:100px;
+    }
+
+    .mainBlockLeft {
+        float:none;
+        display:block;
+        width:100%;
+    }
+
+    .mainBlockRight {
+        float:none;
+        display:block;
+        width:100%;
+    }
+}

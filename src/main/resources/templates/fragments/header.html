@@ -1,0 +1,17 @@
+<header th:fragment="header" th:remove="tag">
+    <div class="clr"></div>
+    <div id="masthead">
+        <a href="/"><img id="logoImage" alt="MAD HAX" th:src="@{/image/MH_logo.png}" /></a>
+        <div style="padding:20px;"><span id="openBtn">&#9776;</span></div>
+        <div class="clr"></div>
+    </div>
+    <div id="navMenu">
+        <a id="closeBtn" href="#">&times;</a>
+        <div class="clr"></div>
+        <a href="/">Home</a>
+        <a href="software">Software</a>
+        <a href="blog">Blog</a>
+        <a href="about">About</a>
+        <a href="contact">Contact</a>
+    </div>
+</header>

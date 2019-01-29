@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MAD HAX</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css} "/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/formatting.css} "/>
+    <script async th:src="@{/js/NavMenu.js}"></script>
+    <script async th:src="@{/js/Home.js}"></script>
+</head>
+<body>
+<div id="container">
+    <div th:replace="fragments/header.html :: header"></div>
+    <div id="main">
+        <h2>Add User</h2>
+        <form action="#" th:action="@{/users/add}" th:object="${user}" method="post">
+            <div style="width:260px; margin:0 auto;">
+                <div style="text-align: right; float:left;">
+                    Username:<br />
+                    Password:<br />
+                    Level:<br />
+                </div>
+                <div style="text-align: left; float:right;">
+                    <input type="text" th:field="*{userName}" /><br />
+                    <input type="password" th:field="*{userPassword}" /><br />
+                    <input type="text" th:field="*{userLevel}" /><br />
+                    <input type="submit" value="Submit" />
+                </div>
+            </div>
+        </form>
+        <div class="clr"></div>
+    </div><!-- end main -->
+<div th:replace="fragments/footer.html :: footer"></div>
+</div><!-- end container -->
+</body>
+</html>

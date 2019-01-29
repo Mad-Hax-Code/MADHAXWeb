@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MAD HAX</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css} "/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/formatting.css} "/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/users.css}" />
+    <script async th:src="@{/js/NavMenu.js}"></script>
+    <script async th:src="@{/js/Home.js}"></script>
+</head>
+<body>
+<div id="container">
+    <div th:replace="fragments/header.html :: header"></div>
+    <div id="main">
+        <h1>Users</h1>
+        <table id="userTable">
+            <tr>
+                <td>Username</td>
+                <td>Level</td>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.getUserName()}"></td>
+                <td th:text="${user.getUserLevel()}"></td>
+            </tr>
+        </table>
+    </div><!-- end main -->
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div><!-- end container -->
+</body>
+</html>
