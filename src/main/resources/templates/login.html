@@ -14,7 +14,11 @@
     <div th:replace="fragments/header.html :: header"></div>
     <div id="main">
         <h2>Login</h2>
-        <div style="width:30%; margin:0 auto;">
+        <div style="width:200px; margin:0 auto; text-align:center; border:1px solid lightseagreen; border-radius:10px 10px 10px 10px;">
+            <div style="background-color:lightskyblue; border-radius:10px 10px 0 0; text-align:center; border-bottom:1px solid lightseagreen;">
+                Sign in below
+            </div>
+            <br />
             <form th:action="@{/login}" method="POST">
                 <input type="text" name="username" id="username" /><br />
                 <input type="password" name="password" id="password" /><br />

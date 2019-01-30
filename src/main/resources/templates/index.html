@@ -13,7 +13,9 @@
 <body>
 <div id="container">
     <div th:replace="fragments/header.html :: header"></div>
-    <div id="main">
+    <div id="mainHome">
+        <img id="motoImage" th:src="@{image/moto.jpg}" />
+        <div class="mainPad">
         <div class="mainBlockContainer">
             <div class="mainBlockLeft">
                 <div class="padRight">
@@ -81,6 +83,7 @@
             </div>
         </div><!-- end mainBlockContainer -->
         <div class="clr"></div>
+        </div><!-- end mainPad -->
     </div><!-- end main -->
     <div th:replace="fragments/footer.html :: footer"></div>
 </div><!-- end container -->

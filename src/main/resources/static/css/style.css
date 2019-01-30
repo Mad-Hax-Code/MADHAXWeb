@@ -33,6 +33,11 @@ p {
     float:left;
 }
 
+#motoImage {
+    width:100%;
+    border-bottom:1px solid #aaa;
+}
+
 #openBtn {
     font-size:3em;
     margin-right:20px;
@@ -79,6 +84,11 @@ p {
     margin-top:60px;
     background-color: #FFF;
     padding:40px;
+}
+
+#mainHome {
+    margin-top:60px;
+    background-color: #FFF;
 }
 
 .mainBlockContainer {

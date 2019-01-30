@@ -20,10 +20,16 @@
                 <div style="text-align: right; float:left;">
                     Username:<br />
                     Password:<br />
+                    First name:<br />
+                    Last name:<br />
+                    Role: <br />
                 </div>
                 <div style="text-align: left; float:right;">
                     <input type="text" th:field="*{username}" /><br />
                     <input type="password" th:field="*{password}" /><br />
+                    <input type="text" th:field="*{firstName}" /><br />
+                    <input type="text" th:field="*{lastName}" /><br />
+                    <input type="text" th:field="*{role}" /><br />
                     <input type="submit" value="Submit" />
                 </div>
             </div>
