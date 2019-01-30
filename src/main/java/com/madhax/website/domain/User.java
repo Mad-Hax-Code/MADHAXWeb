@@ -1,6 +1,9 @@
 package com.madhax.website.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class User {
@@ -12,15 +15,14 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private boolean enabled;
-    private String secret;
+    private String role;
 
     public User() { }
 
-    public User(String username, String password, boolean enabled) {
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
-        this.enabled = enabled;
+        this.role = role;
     }
 
     public Long getId() {
@@ -63,19 +65,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public String getRole() {
+        return role;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getSecret() {
-        return secret;
-    }
-
-    public void setSecret(String secret) {
-        this.secret = secret;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

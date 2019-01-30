@@ -7,6 +7,7 @@
     <title>MAD HAX - Articles</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/formatting.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/blog.css}" />
     <script async th:src="@{/js/NavMenu.js}"></script>
 </head>
 <body>
@@ -14,6 +15,14 @@
     <div th:replace="fragments/header.html :: header"></div>
     <div id="main">
         <h2>Articles</h2>
+        <div class="articleSummaryContainer" th:each="article : ${articles}">
+            <div class="articleSummaryTitle" th:text="${article.getTitle()}"></div>
+            <div class="articleSummaryBody">
+                <span class="articleAuthor" th:text="${' by ' + article.getUser().getFirstName() + ' ' + article.getUser().getLastName()}">by </span>
+                <br />
+                <span th:text="${article.getBody()}"></span>
+            </div>
+        </div>
     </div><!-- end main -->
     <div th:replace="fragments/footer.html :: footer"></div>
 </div><!-- end container -->

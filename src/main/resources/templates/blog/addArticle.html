@@ -14,8 +14,8 @@
     <div th:replace="fragments/header.html :: header"></div>
     <div id="main">
         <form action="#" th:action="@{/article/add}" th:object="${article}" method="post">
-            <p>Subject: <input type="text" th:field="*{articleTitle}" /></p>
-            <p>Content: <textarea type="text" th:field="*{articleBody}" /></p>
+            <p>Subject: <input type="text" th:field="*{title}" /></p>
+            <p>Content: <textarea type="text" th:field="*{body}" /></p>
             <p><input type="submit" value="Submit" /></p>
         </form>
     </div><!-- end main -->
