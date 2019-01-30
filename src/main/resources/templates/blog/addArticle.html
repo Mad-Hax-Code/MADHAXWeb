@@ -8,6 +8,14 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css} "/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/formatting.css} "/>
     <script async th:src="@{/js/NavMenu.js}"></script>
+    <script src='http://cloud.tinymce.com/5-testing/tinymce.min.js'></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'codesample code image link',
+            toolbar: 'bold italic underline | alignleft alighcenter alignright | bullist numlist outdent indent | codesample | link image code'
+        });
+    </script>
 </head>
 <body>
 <div id="container">
