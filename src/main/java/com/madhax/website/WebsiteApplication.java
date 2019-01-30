@@ -30,7 +30,7 @@ public class WebsiteApplication {
             User myUser = new User(
                     "admin",
                     "$2a$04$C/mOkKfXtOhKjhnUUrwp3OcWzLHJqkGzYpV1oys.MBPXc9M8soAQ6",
-                    "USER");
+                    "ROLE_USER");
             myUser.setFirstName("James");
             myUser.setLastName("Cathcart");
             userService.saveUser(myUser);
