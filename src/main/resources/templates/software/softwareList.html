@@ -9,6 +9,17 @@
     <div th:replace="fragments/header.html :: header"></div>
     <div id="main">
         <h2>Software</h2>
+        <span th:each="project : ${projects}">
+            <div class="projectList">
+                <div class="projectListTitle">
+                    <a th:href="'/software/' + ${project.id}"><span style="color:orange;" th:text="${project.name}">Project Title</span></a>
+                    <span style="font-style:italic;" th:text="${project.version}"></span>
+                </div>
+                <div class="projectListBody" th:text="${project.description}">
+                    Project body.
+                </div>
+            </div>
+        </span>
     </div><!-- end main-->
     <div th:replace="fragments/footer.html :: footer"></div>
 </div><!-- end container -->

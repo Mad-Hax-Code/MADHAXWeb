@@ -65,5 +65,38 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         project1.getDevLog().add(savedLog1);
 
         projectRepository.save(project1);
+
+        Project project2 = new Project();
+        project2.setName("MADPorts");
+        project2.setDescription("A mutli-threaded tcp scanning desktop application.");
+        project2.setVersion("In development");
+
+        Feature project2Feature1 = new Feature();
+        project2Feature1.setTitle("Scan Port Ranges");
+        project2Feature1.setBody("The application scans the tcp ports for a given range.");
+        Feature savedProject2Feature1 = featureRepository.save(project2Feature1);
+
+        Feature project2Feature2 = new Feature();
+        project2Feature2.setTitle("Multi-threaded Scans");
+        project2Feature2.setBody("Divide the port range between a given number of threads to increase the speed.");
+        Feature savedProject2Feature2 = featureRepository.save(project2Feature2);
+
+        Feature project2Feature3 = new Feature();
+        project2Feature3.setTitle("Choose Timeout Value");
+        project2Feature3.setBody("Set the timeout value for each port in order to customize your scan.");
+        Feature savedProject2Feature3 = featureRepository.save(project2Feature3);
+
+        Log project2Log1 = new Log();
+        project2Log1.setTitle("In Development");
+        project2Log1.setMessage("This project is currently in development. No releases have been published as of yet.");
+        Log savedProject2Log1 = logRepository.save(project2Log1);
+
+        project2.getFeatures().add(savedProject2Feature1);
+        project2.getFeatures().add(savedProject2Feature2);
+        project2.getFeatures().add(savedProject2Feature3);
+
+        project2.getDevLog().add(savedProject2Log1);
+
+        projectRepository.save(project2);
     }
 }
