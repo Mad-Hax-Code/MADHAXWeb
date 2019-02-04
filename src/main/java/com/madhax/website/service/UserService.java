@@ -1,6 +1,7 @@
 package com.madhax.website.service;
 
 import com.madhax.website.domain.User;
+import com.madhax.website.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
