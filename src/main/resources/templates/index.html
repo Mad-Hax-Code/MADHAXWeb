@@ -7,7 +7,7 @@
 <div id="container">
     <div th:replace="fragments/header.html :: header"></div>
     <div id="mainHome">
-        <img id="motoImage" th:src="@{image/moto.jpg}" />
+        <img id="motoImage" th:src="@{image/moto_search.jpg}" />
         <div class="mainPad">
         <div class="mainBlockContainer">
             <div class="mainBlockLeft">
@@ -32,9 +32,6 @@
             </div>
         </div><!-- end mainBlockContainer -->
         <div class="mainBlockContainer">
-            <div class="mainBlockLeft">
-                <img style="width:100%;" th:src="@{image/cloud.jpg}"/>
-            </div><!-- end mainBlockLeft -->
             <div class="mainBlockRight">
                 <div class="padLeft">
                     <span class="customHeader">Keep Your Head in the Cloud</span>
@@ -52,6 +49,9 @@
                         velit. </p>
                 </div><!-- end padLeft -->
             </div><!-- end mainBlockRight -->
+            <div class="mainBlockLeft">
+                <img style="width:100%;" th:src="@{image/cloud.jpg}"/>
+            </div><!-- end mainBlockLeft -->
         </div><!-- end mainBlockContainer -->
         <div class="mainBlockContainer">
             <div class="mainBlockLeft">

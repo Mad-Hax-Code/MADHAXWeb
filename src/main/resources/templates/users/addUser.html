@@ -6,7 +6,7 @@
 <body>
 <div id="container">
     <div th:replace="fragments/header.html :: header"></div>
-    <div id="main">
+    <div id="mainContainer">
         <h2>Add User</h2>
         <form action="#" th:action="@{/users/add}" th:object="${user}" method="post">
             <div style="width:260px; margin:0 auto;">
@@ -28,7 +28,7 @@
             </div>
         </form>
         <div class="clr"></div>
-    </div><!-- end main -->
+    </div><!-- end mainContainer -->
 <div th:replace="fragments/footer.html :: footer"></div>
 </div><!-- end container -->
 </body>

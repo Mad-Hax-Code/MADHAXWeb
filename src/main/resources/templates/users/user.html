@@ -6,7 +6,7 @@
 <body>
 <div id="container">
     <div th:replace="fragments/header.html :: header"></div>
-    <div id="main">
+    <div id="mainContainer">
         <h1>Users</h1>
         <table id="userTable">
             <tr>
@@ -22,7 +22,7 @@
                 <td th:text="${user.getRole()}"></td>
             </tr>
         </table>
-    </div><!-- end main -->
+    </div><!-- end mainContainer -->
     <div th:replace="fragments/footer.html :: footer"></div>
 </div><!-- end container -->
 </body>

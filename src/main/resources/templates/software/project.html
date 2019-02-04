@@ -7,21 +7,31 @@
 <body>
 <div id="container">
     <div th:replace="fragments/header.html :: header"></div>
-    <div id="main">
-        <h2 th:text="${project.name}"></h2>
-        <p th:text="${project.description}"></p>
-        <b>Repository: </b><a target="new" th:href="${project.gitHubURL}" th:text="${project.gitHubURL}"></a>
-        <h3>Features</h3>
-        <div style="margin-left:20px;" th:each="feature : ${features}">
-            <p style="font-weight:bold;" th:text="' - ' + ${feature.title}"></p>
-            <p th:text="${feature.body}"></p>
-        </div>
-        <h3>Development Log</h3>
-        <div style="margin-left:20px;" th:each="log : ${devLog}">
-            <p style="font-weight:bold;" th:text="${log.title}"></p>
-            <p th:text="${log.message}"></p>
-        </div>
-    </div><!-- end main-->
+    <div id="mainContainer">
+        <div id="mainContent">
+            <h2 th:text="${project.name}"></h2>
+            <p th:text="${project.description}"></p>
+            <b>Repository: </b><a target="new" th:href="${project.gitHubURL}" th:text="${project.gitHubURL}"></a>
+            <h3 style="color:darkorange;">Features</h3>
+            <ul>
+                <li th:each="feature : ${project.features}">
+                    <span style="font-weight:bold;" th:text="${feature.title}"></span>
+                    <ul>
+                        <li style="list-style: none;" th:text="${feature.body}">Body</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3 style="color:darkorange;">Development Log</h3>
+            <ul>
+                <li th:each="log : ${project.devLog}">
+                    <span style="font-weight:bold;" th:text="${log.title}"></span>
+                    <ul>
+                        <li style="list-style: none;" th:text="${log.message}"></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- end mainContent -->
+    </div><!-- end mainContainer-->
     <div th:replace="fragments/footer.html :: footer"></div>
 </div><!-- end container -->
 </body>
