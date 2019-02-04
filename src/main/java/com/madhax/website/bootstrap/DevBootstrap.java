@@ -37,6 +37,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         project1.setName("MADHAX Website");
         project1.setDescription("A website for software projects.");
         project1.setVersion("In development");
+        project1.setGitHubURL("https://github.com/Mad-Hax-Code/MADHAXWeb");
 
         Feature project1Feature1 = new Feature();
         project1Feature1.setTitle("Dynamically Add Projects");
@@ -70,6 +71,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         project2.setName("MADPorts");
         project2.setDescription("A mutli-threaded tcp scanning desktop application.");
         project2.setVersion("In development");
+        project2.setGitHubURL("https://github.com/Mad-Hax-Code/MADPortsCLI");
 
         Feature project2Feature1 = new Feature();
         project2Feature1.setTitle("Scan Port Ranges");

@@ -14,6 +14,7 @@ public class Project {
     @Lob
     private String description;
     private String version;
+    private String gitHubURL;
     @OneToMany
     private Set<Feature> features = new HashSet<>();
     @OneToMany
@@ -51,6 +52,14 @@ public class Project {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getGitHubURL() {
+        return gitHubURL;
+    }
+
+    public void setGitHubURL(String gitHubURL) {
+        this.gitHubURL = gitHubURL;
     }
 
     public Set<Feature> getFeatures() {
