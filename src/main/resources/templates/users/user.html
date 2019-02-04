@@ -1,15 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>MAD HAX</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css} "/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/formatting.css} "/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/users.css}" />
-    <script async th:src="@{/js/NavMenu.js}"></script>
-    <script async th:src="@{/js/Home.js}"></script>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head.html :: head">
+    <title>MADHAX Software</title>
 </head>
 <body>
 <div id="container">

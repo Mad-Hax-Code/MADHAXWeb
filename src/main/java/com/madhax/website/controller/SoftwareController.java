@@ -8,6 +8,6 @@ public class SoftwareController {
 
     @GetMapping("/software")
     public String software() {
-        return "software";
+        return "software/softwareList";
     }
 }

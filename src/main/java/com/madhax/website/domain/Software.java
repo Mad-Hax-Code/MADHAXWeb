@@ -1,6 +1,7 @@
 package com.madhax.website.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,11 +12,11 @@ public class Software {
     private Long id;
     private String name;
     @OneToMany
-    private Set<Feature> features;
+    private Set<Feature> features = new HashSet<>();
     @OneToMany
-    private Set<Log> updates;
+    private Set<Log> updates = new HashSet<>();
     @OneToMany
-    private Set<Bug> bugs;
+    private Set<Bug> bugs = new HashSet<>();
 
     public Long getId() {
         return id;
