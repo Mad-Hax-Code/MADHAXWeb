@@ -1,6 +1,5 @@
 package com.madhax.website.controller;
 
-import com.madhax.website.domain.Bug;
 import com.madhax.website.domain.Feature;
 import com.madhax.website.domain.Log;
 import com.madhax.website.domain.Project;
@@ -35,7 +34,6 @@ public class SoftwareController {
         Project project = projectRepository.findById(id).get();
         Set<Feature> features = project.getFeatures();
         Set<Log> devLog = project.getDevLog();
-        Set<Bug> bugs = project.getBugs();
 
         model.addAttribute("project", project);
         model.addAttribute("features", features);
