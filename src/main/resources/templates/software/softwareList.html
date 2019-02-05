@@ -8,8 +8,9 @@
 <div id="container">
     <div th:replace="fragments/header.html :: header"></div>
     <div id="mainContainer">
-        <h2>Software</h2>
-        <span th:each="project : ${projects}">
+        <div id="mainContent">
+            <h2>Software</h2>
+            <span th:each="project : ${projects}">
             <div class="projectList">
                 <div class="projectListTitle">
                     <a th:href="'/software/' + ${project.id}"><span style="color:orange;" th:text="${project.name}">Project Title</span></a>
@@ -25,6 +26,7 @@
                 </div>
             </div>
         </span>
+        </div><!-- end mainContent -->
     </div><!-- end mainContainer-->
     <div th:replace="fragments/footer.html :: footer"></div>
 </div><!-- end container -->

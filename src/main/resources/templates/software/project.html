@@ -23,7 +23,7 @@
             </ul>
             <h3 style="color:darkorange;">Development Log</h3>
             <ul>
-                <li th:each="log : ${project.devLog}">
+                <li th:each="log : ${project.devMessages}">
                     <span style="font-weight:bold;" th:text="${log.title}"></span>
                     <ul>
                         <li style="list-style: none;" th:text="${log.message}"></li>

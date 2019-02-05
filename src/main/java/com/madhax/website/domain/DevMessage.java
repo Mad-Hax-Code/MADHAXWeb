@@ -1,18 +1,30 @@
 package com.madhax.website.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Log {
+public class DevMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String message;
+    @ManyToOne
+    private Project project;
+
+    public DevMessage() { }
+
+    public DevMessage(String title, String message) {
+        this.title = title;
+        this.message = message;
+    }
+
+    public DevMessage(String title, String message, Project project) {
+        this.title = title;
+        this.message = message;
+        this.project = project;
+    }
 
     public Long getId() {
         return id;
@@ -36,5 +48,13 @@ public class Log {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

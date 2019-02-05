@@ -15,11 +15,11 @@ public class Project {
     private String description;
     private String version;
     private String gitHubURL;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private Set<Feature> features = new HashSet<>();
-    @OneToMany
-    private Set<Log> devLog = new HashSet<>();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+    private Set<DevMessage> devMessages = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private Set<Bug> bugs = new HashSet<>();
 
     public Long getId() {
@@ -70,12 +70,24 @@ public class Project {
         this.features = features;
     }
 
-    public Set<Log> getDevLog() {
-        return devLog;
+    public Project addFeature(Feature feature) {
+        feature.setProject(this);
+        this.features.add(feature);
+        return this;
     }
 
-    public void setDevLog(Set<Log> devLog) {
-        this.devLog = devLog;
+    public Set<DevMessage> getDevMessages() {
+        return devMessages;
+    }
+
+    public void setDevMessages(Set<DevMessage> devMessages) {
+        this.devMessages = devMessages;
+    }
+
+    public Project addDevMessage(DevMessage devMessage) {
+        devMessage.setProject(this);
+        this.devMessages.add(devMessage);
+        return this;
     }
 
     public Set<Bug> getBugs() {

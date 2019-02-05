@@ -1,9 +1,6 @@
 package com.madhax.website.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Feature {
@@ -13,6 +10,22 @@ public class Feature {
     private Long id;
     private String title;
     private String body;
+    @ManyToOne
+    private Project project;
+
+    public Feature() { }
+
+    public Feature(String title, String body) {
+        this.title = title;
+        this.body = body;
+        this.project = project;
+    }
+
+    public Feature(String title, String body, Project project) {
+        this.title = title;
+        this.body = body;
+        this.project = project;
+    }
 
     public Long getId() {
         return id;
@@ -36,5 +49,13 @@ public class Feature {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

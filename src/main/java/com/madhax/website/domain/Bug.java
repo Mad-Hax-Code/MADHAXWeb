@@ -1,9 +1,6 @@
 package com.madhax.website.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Bug {
@@ -13,6 +10,8 @@ public class Bug {
     private Long id;
     private String title;
     private String body;
+    @ManyToOne
+    private Project project;
 
     public Long getId() {
         return id;
