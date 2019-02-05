@@ -21,6 +21,15 @@
                     </ul>
                 </li>
             </ul>
+            <h3 style="color:darkorange;">Known Issues</h3>
+            <ol>
+                <li th:each="issue : ${project.issues}">
+                    <span style="font-weight:bold;" th:text="${issue.title}"></span>
+                    <ul>
+                        <li style="list-style: none;" th:text="${issue.body}"></li>
+                    </ul>
+                </li>
+            </ol>
             <h3 style="color:darkorange;">Development Log</h3>
             <ul>
                 <li th:each="log : ${project.devMessages}">

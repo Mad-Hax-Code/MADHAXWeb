@@ -20,7 +20,7 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private Set<DevMessage> devMessages = new HashSet<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private Set<Bug> bugs = new HashSet<>();
+    private Set<Issue> issues = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -90,11 +90,17 @@ public class Project {
         return this;
     }
 
-    public Set<Bug> getBugs() {
-        return bugs;
+    public Set<Issue> getIssues() {
+        return issues;
     }
 
-    public void setBugs(Set<Bug> bugs) {
-        this.bugs = bugs;
+    public void setIssues(Set<Issue> issues) {
+        this.issues = issues;
+    }
+
+    public Project addIssue(Issue issue) {
+        issue.setProject(this);
+        this.issues.add(issue);
+        return this;
     }
 }

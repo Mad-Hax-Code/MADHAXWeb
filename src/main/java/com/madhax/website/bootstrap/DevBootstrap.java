@@ -2,10 +2,8 @@ package com.madhax.website.bootstrap;
 
 import com.madhax.website.domain.DevMessage;
 import com.madhax.website.domain.Feature;
+import com.madhax.website.domain.Issue;
 import com.madhax.website.domain.Project;
-import com.madhax.website.repository.BugRepository;
-import com.madhax.website.repository.DevMessageRepository;
-import com.madhax.website.repository.FeatureRepository;
 import com.madhax.website.repository.ProjectRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -19,7 +17,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     private final ProjectRepository projectRepository;
 
-    public DevBootstrap(ProjectRepository projectRepository, FeatureRepository featureRepository, DevMessageRepository devMessageRepository, BugRepository bugRepository) {
+    public DevBootstrap(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 
@@ -84,6 +82,11 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         project2.addDevMessage(new DevMessage(
                 "In Development",
                 "This project is currently in development. No releases have been published as of yet."
+        ));
+
+        project2.addIssue(new Issue(
+                "Wrong Port Count",
+                "ScanResult port count is returning incorrect value."
         ));
 
         projects.add(project2);
