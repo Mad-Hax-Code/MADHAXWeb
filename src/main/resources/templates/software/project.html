@@ -21,7 +21,7 @@
                     </ul>
                 </li>
             </ul>
-            <h3 style="color:darkorange;">Known Issues</h3>
+            <h3 style="color:darkorange;" th:if="${not project.issues.isEmpty()}">Known Issues</h3>
             <ol>
                 <li th:each="issue : ${project.issues}">
                     <span style="font-weight:bold;" th:text="${issue.title}"></span>
