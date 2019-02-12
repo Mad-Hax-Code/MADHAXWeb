@@ -3,24 +3,25 @@ package com.madhax.website.domain;
 import javax.persistence.*;
 
 @Entity
-public class DevMessage {
+public class DevNote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @Lob
     private String message;
     @ManyToOne
     private Project project;
 
-    public DevMessage() { }
+    public DevNote() { }
 
-    public DevMessage(String title, String message) {
+    public DevNote(String title, String message) {
         this.title = title;
         this.message = message;
     }
 
-    public DevMessage(String title, String message, Project project) {
+    public DevNote(String title, String message, Project project) {
         this.title = title;
         this.message = message;
         this.project = project;

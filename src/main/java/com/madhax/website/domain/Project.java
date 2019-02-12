@@ -14,13 +14,20 @@ public class Project {
     @Lob
     private String description;
     private String version;
-    private String gitHubURL;
+    private String repositoryURL;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private Set<Feature> features = new HashSet<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private Set<DevMessage> devMessages = new HashSet<>();
+    private Set<DevNote> devNotes = new HashSet<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private Set<Issue> issues = new HashSet<>();
+
+    public Project() { }
+
+    public Project(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
@@ -54,12 +61,12 @@ public class Project {
         this.version = version;
     }
 
-    public String getGitHubURL() {
-        return gitHubURL;
+    public String getRepositoryURL() {
+        return repositoryURL;
     }
 
-    public void setGitHubURL(String gitHubURL) {
-        this.gitHubURL = gitHubURL;
+    public void setRepositoryURL(String repositoryURL) {
+        this.repositoryURL = repositoryURL;
     }
 
     public Set<Feature> getFeatures() {
@@ -76,17 +83,17 @@ public class Project {
         return this;
     }
 
-    public Set<DevMessage> getDevMessages() {
-        return devMessages;
+    public Set<DevNote> getDevNotes() {
+        return devNotes;
     }
 
-    public void setDevMessages(Set<DevMessage> devMessages) {
-        this.devMessages = devMessages;
+    public void setDevNotes(Set<DevNote> devNotes) {
+        this.devNotes = devNotes;
     }
 
-    public Project addDevMessage(DevMessage devMessage) {
-        devMessage.setProject(this);
-        this.devMessages.add(devMessage);
+    public Project addDevMessage(DevNote devNote) {
+        devNote.setProject(this);
+        this.devNotes.add(devNote);
         return this;
     }
 

@@ -14,19 +14,19 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<User> getAllUsers() {
+    public List<User> getAll() {
         return (List<User>) userRepository.findAll();
     }
 
-    public Optional<User> getUserById(long id) {
+    public Optional<User> getById(long id) {
         return userRepository.findById(id);
     }
 
-    public void saveUser(User user) {
+    public void save(User user) {
         userRepository.save(user);
     }
 
-    public void deleteUser(User user) {
+    public void delete(User user) {
         userRepository.delete(user);
     }
 }

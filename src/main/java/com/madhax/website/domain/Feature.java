@@ -9,6 +9,7 @@ public class Feature {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @Lob
     private String body;
     @ManyToOne
     private Project project;

@@ -16,13 +16,13 @@ public class UserController {
 
     @GetMapping
     public String users(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userService.getAll());
         return "users/user";
     }
 
     @GetMapping("/details/{id}")
     public String viewUserDetails(@PathVariable long id, Model model) {
-        User user = userService.getUserById(id).get();
+        User user = userService.getById(id).get();
         model.addAttribute("user", user);
         return "users/details";
     }
@@ -35,7 +35,7 @@ public class UserController {
 
     @PostMapping("/add")
     public String saveUser(@ModelAttribute User user) {
-        userService.saveUser(user);
+        userService.save(user);
         return "users/details";
     }
 

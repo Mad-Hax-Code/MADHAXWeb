@@ -1,6 +1,6 @@
 package com.madhax.website.bootstrap;
 
-import com.madhax.website.domain.DevMessage;
+import com.madhax.website.domain.DevNote;
 import com.madhax.website.domain.Feature;
 import com.madhax.website.domain.Issue;
 import com.madhax.website.domain.Project;
@@ -34,7 +34,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         project1.setName("MADHAX Website");
         project1.setDescription("A website for software projects.");
         project1.setVersion("In development");
-        project1.setGitHubURL("https://github.com/Mad-Hax-Code/MADHAXWeb");
+        project1.setRepositoryURL("https://github.com/Mad-Hax-Code/MADHAXWeb");
 
         project1.addFeature(new Feature(
                 "Dynamically Add Projects",
@@ -51,7 +51,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "Use the log feature to keep a history of development and upcoming improvements"
         ));
 
-        project1.addDevMessage(new DevMessage(
+        project1.addDevMessage(new DevNote(
                 "In Development",
                 "This project is currently in development. No releases have been published as of yet."
         ));
@@ -62,7 +62,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         project2.setName("MADPorts");
         project2.setDescription("A mutli-threaded tcp scanning desktop application.");
         project2.setVersion("In development");
-        project2.setGitHubURL("https://github.com/Mad-Hax-Code/MADPortsCLI");
+        project2.setRepositoryURL("https://github.com/Mad-Hax-Code/MADPortsCLI");
 
         project2.addFeature(new Feature(
                 "Scan Port Ranges",
@@ -79,7 +79,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "Set the timeout value for each port in order to customize your scan."
         ));
 
-        project2.addDevMessage(new DevMessage(
+        project2.addDevMessage(new DevNote(
                 "In Development",
                 "This project is currently in development. No releases have been published as of yet."
         ));

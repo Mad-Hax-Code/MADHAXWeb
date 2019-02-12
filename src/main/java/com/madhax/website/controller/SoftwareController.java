@@ -1,54 +1,65 @@
 package com.madhax.website.controller;
 
 import com.madhax.website.domain.Project;
-import com.madhax.website.repository.ProjectRepository;
+import com.madhax.website.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/software")
 public class SoftwareController {
 
-    private ProjectRepository projectRepository;
+    private ProjectService projectService;
 
     @Autowired
-    public SoftwareController(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
+    public SoftwareController(ProjectService projectService) {
+        this.projectService = projectService;
     }
 
-    @GetMapping("/")
-    public String software(Model model) {
-        model.addAttribute("projects", projectRepository.findAll());
+    @GetMapping({"", "/"})
+    public String listProjects(Model model) {
+        model.addAttribute("projects", projectService.getAll());
         return "software/softwareList";
     }
 
     @GetMapping("/{id}")
-    public String project(Model model, @PathVariable Long id) {
+    public String showProject(Model model, @PathVariable Long id) {
 
-        Project project = projectRepository.findById(id).get();
+        Project project = projectService.getById(id);
         model.addAttribute("project", project);
 
         return "software/project";
     }
 
-    @GetMapping("/add")
-    public String addProject() {
-        return "software/addProject";
+    @GetMapping("/new")
+    public String newProject(Model model) {
+        model.addAttribute("project", new Project());
+        return "software/newProject";
     }
 
-    @GetMapping("/manage")
-    public String manage() {
-        return "software/manageProjects";
+    @GetMapping("/edit/{id}")
+    public String editProject(Model model, @PathVariable Long id) {
+        model.addAttribute("project", projectService.getById(id));
+        return "software/editProject";
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteProject(@PathVariable Long id) {
-        projectRepository.delete(projectRepository.findById(id).get());
-        return "software/manageProjects";
+    @PostMapping("/save")
+    public String saveProject(@ModelAttribute Project project) {
+        projectService.save(project);
+        return "redirect:/software/" + project.getId();
+    }
+
+    @GetMapping("/delete/{id}")
+    public String confirmDelete(@PathVariable Long id, Model model) {
+        model.addAttribute("project", projectService.getById(id));
+        return "software/confirmDelete";
+    }
+
+    @PostMapping("/delete")
+    public String deleteProject(@ModelAttribute Project project) {
+        projectService.delete(project);
+        return "redirect:/software/softwareList";
     }
 }

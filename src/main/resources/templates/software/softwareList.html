@@ -10,6 +10,10 @@
     <div id="mainContainer">
         <div id="mainContent">
             <h2>Software</h2>
+            <div class="projectList">
+                <a class="add" style="float:right;" th:href="'/software/new'">+</a>
+                <div class="clr"></div>
+            </div>
             <span th:each="project : ${projects}">
             <div class="projectList">
                 <div class="projectListTitle">
@@ -21,7 +25,11 @@
                     <ul>
                         <li th:each="feature : ${project.features}"><span th:text="${feature.title}"></span></li>
                     </ul>
-                    <a style="float:right; clear:both; margin-right:40px;" th:href="'/software/' + ${project.id}">Project page</a>
+                    <div style="text-align: right;">
+                        <a th:href="'/software/edit/' + ${project.id}">Edit</a> |
+                        <a th:href="'/software/delete/' + ${project.id}">Delete</a> |
+                        <a th:href="'/software/' + ${project.id}">Project page</a>
+                    </div>
                     <div class="clr"></div>
                 </div>
             </div>

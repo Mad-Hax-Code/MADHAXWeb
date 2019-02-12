@@ -11,8 +11,8 @@
         <div id="mainContent">
             <h2 th:text="${project.name}"></h2>
             <p th:text="${project.description}"></p>
-            <b>Repository: </b><a target="new" th:href="${project.gitHubURL}" th:text="${project.gitHubURL}"></a>
-            <h3 style="color:darkorange;">Features</h3>
+            <b>Repository: </b><a target="new" th:href="${project.repositoryURL}" th:text="${project.repositoryURL}"></a>
+            <h3 style="color:darkorange;" th:if="${not project.features.isEmpty()}">Features</h3>
             <ul>
                 <li th:each="feature : ${project.features}">
                     <span style="font-weight:bold;" th:text="${feature.title}"></span>
@@ -30,9 +30,9 @@
                     </ul>
                 </li>
             </ol>
-            <h3 style="color:darkorange;">Development Log</h3>
+            <h3 style="color:darkorange;" th:if="${not project.devNotes.isEmpty()}">Development Log</h3>
             <ul>
-                <li th:each="log : ${project.devMessages}">
+                <li th:each="log : ${project.devNotes}">
                     <span style="font-weight:bold;" th:text="${log.title}"></span>
                     <ul>
                         <li style="list-style: none;" th:text="${log.message}"></li>
