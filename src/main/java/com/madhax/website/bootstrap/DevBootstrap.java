@@ -4,7 +4,7 @@ import com.madhax.website.domain.DevNote;
 import com.madhax.website.domain.Feature;
 import com.madhax.website.domain.Issue;
 import com.madhax.website.domain.Project;
-import com.madhax.website.repository.ProjectRepository;
+import com.madhax.website.service.ProjectService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -15,15 +15,15 @@ import java.util.List;
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final ProjectRepository projectRepository;
+    private final ProjectService projectService;
 
-    public DevBootstrap(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
+    public DevBootstrap(ProjectService projectService) {
+        this.projectService = projectService;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        projectRepository.saveAll(initData());
+        projectService.saveAll(initData());
     }
 
     private List<Project> initData() {

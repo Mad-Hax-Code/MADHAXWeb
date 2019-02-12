@@ -32,6 +32,10 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
+    public Iterable<Project> saveAll(Iterable<Project> projects) {
+        return projectRepository.saveAll(projects);
+    }
+
     public void delete(Project project) {
         projectRepository.delete(project);
     }

@@ -2,8 +2,8 @@ package com.madhax.website.controller;
 
 import com.madhax.website.domain.Feature;
 import com.madhax.website.domain.Project;
-import com.madhax.website.repository.FeatureRepository;
-import com.madhax.website.repository.ProjectRepository;
+import com.madhax.website.service.FeatureService;
+import com.madhax.website.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,31 +12,31 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/software/features")
 public class FeatureController {
 
-    private final FeatureRepository featureRepository;
-    private final ProjectRepository projectRepository;
+    private final ProjectService projectService;
+    private final FeatureService featureService;
 
-    public FeatureController(FeatureRepository featureRepository, ProjectRepository projectRepository) {
-        this.featureRepository = featureRepository;
-        this.projectRepository = projectRepository;
+    public FeatureController(ProjectService projectService, FeatureService featureService) {
+        this.projectService = projectService;
+        this.featureService = featureService;
     }
 
     @GetMapping("/new/{projectId}")
     public String newFeature(Model model, @PathVariable Long projectId) {
-        model.addAttribute("project", projectRepository.findById(projectId).get());
+        model.addAttribute("project", projectService.getById(projectId));
         return "/software/feature/addFeature";
     }
 
     @PostMapping("/save/{projectId}")
     public String saveFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
-        Project project = projectRepository.findById(projectId).get();
+        Project project = projectService.getById(projectId);
         project.addFeature(feature);
-        projectRepository.save(project);
+        projectService.save(project);
         return "redirect:/software/" + project.getId();
     }
 
     @GetMapping("/edit/{featureId}")
     public String editFeature(@PathVariable Long featureId, Model model) {
-        model.addAttribute("feature", featureRepository.findById(featureId).get());
+        model.addAttribute("feature", featureService.getById(featureId));
         return "/software/feature/editFeature";
     }
 }
