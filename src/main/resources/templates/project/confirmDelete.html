@@ -11,9 +11,9 @@
         <div id="mainContent">
             <h2>Delete Project</h2>
             <p>Are you sure you want to permanently delete the project: <span th:text="${project.name}"></span></p>
-            <form th:action="@{/software/delete}" method="post">
+            <form th:action="@{/project/delete}" method="post">
                 <input type="submit" name="submit" value="Yes, delete project" />
-                <input type="hidden" name="projectId" th:field="*{project.id}" />
+                <input type="hidden" name="projectId" th:value="${project.id}" />
             </form>
         </div><!-- end mainContent -->
     </div><!-- end mainContainer-->

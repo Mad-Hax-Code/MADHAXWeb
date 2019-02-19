@@ -61,9 +61,9 @@ public class FeatureControllerTest {
     @Test
     public void newFeature() throws Exception {
         when(projectService.getById(anyLong())).thenReturn(project);
-        mockMvc.perform(get("/software/features/new/1"))
+        mockMvc.perform(get("/project/1/features/new/"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/software/feature/addFeature"))
+                .andExpect(view().name("/project/feature/addFeature"))
                 .andExpect(model().attributeExists("project"));
 
         verify(projectService, times(1)).getById(anyLong());
@@ -73,7 +73,7 @@ public class FeatureControllerTest {
     public void saveFeature() throws Exception {
         // todo add view().name() expectation
         when(projectService.getById(anyLong())).thenReturn(project);
-        mockMvc.perform(post("/software/features/save/1"))
+        mockMvc.perform(post("/project/1/features/save"))
                 .andExpect(status().is3xxRedirection());
         verify(projectService, times(1)).getById(anyLong());
         verify(projectService, times(1)).save(any());
@@ -82,10 +82,22 @@ public class FeatureControllerTest {
     @Test
     public void editFeature() throws Exception {
         when(featureService.getById(anyLong())).thenReturn(feature);
-        mockMvc.perform(get("/software/features/edit/1"))
+        mockMvc.perform(get("/project/1/features/edit/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/software/feature/editFeature"))
+                .andExpect(view().name("/project/feature/editFeature"))
                 .andExpect(model().attributeExists("feature"));
         verify(featureService, times(1)).getById(anyLong());
+    }
+
+    @Test
+    public void deleteFeatureById() throws Exception {
+
+        mockMvc.perform(
+                post("/project/1/features/delete")
+                    .param("featureId", "1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/project/1"));
+
+        verify(featureService, times(1)).delete(any());
     }
 }

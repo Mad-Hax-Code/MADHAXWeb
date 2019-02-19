@@ -23,13 +23,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SoftwareControllerTest {
+public class ProjectControllerTest {
 
     @Mock
     ProjectService projectService;
 
     @InjectMocks
-    SoftwareController controller;
+    ProjectController controller;
 
     MockMvc mockMvc;
 
@@ -53,9 +53,9 @@ public class SoftwareControllerTest {
 
         when(projectService.getAll()).thenReturn(projects);
 
-        mockMvc.perform(get("/software"))
+        mockMvc.perform(get("/project"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("software/softwareList"))
+                .andExpect(view().name("project/projectList"))
                 .andExpect(model().attributeExists("projects"));
 
         verify(projectService, times(1)).getAll();
@@ -66,18 +66,18 @@ public class SoftwareControllerTest {
 
         when(projectService.getById(anyLong())).thenReturn(project);
 
-        mockMvc.perform(get("/software/1"))
+        mockMvc.perform(get("/project/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("software/project"))
+                .andExpect(view().name("project/viewProject"))
                 .andExpect(model().attributeExists("project"));
     }
 
     @Test
     public void newProjectIT() throws Exception{
 
-        mockMvc.perform(get("/software/new"))
+        mockMvc.perform(get("/project/new"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("software/newProject"))
+                .andExpect(view().name("project/newProject"))
                 .andExpect(model().attributeExists("project"));
     }
 
@@ -86,16 +86,16 @@ public class SoftwareControllerTest {
 
         when(projectService.getById(anyLong())).thenReturn(project);
 
-        mockMvc.perform(get("/software/edit/1"))
+        mockMvc.perform(get("/project/1/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("software/editProject"))
+                .andExpect(view().name("project/editProject"))
                 .andExpect(model().attributeExists("project"));
     }
 
     @Test
     public void saveProjectIT() throws Exception {
         // todo add view().name() expectation
-        mockMvc.perform(post("/software/save"))
+        mockMvc.perform(post("/project/save"))
                 .andExpect(status().is3xxRedirection());
         verify(projectService, times(1)).save(any());
     }
@@ -105,16 +105,16 @@ public class SoftwareControllerTest {
 
         when(projectService.getById(anyLong())).thenReturn(project);
 
-        mockMvc.perform(get("/software/delete/1"))
+        mockMvc.perform(get("/project/1/delete"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("software/confirmDelete"))
+                .andExpect(view().name("project/confirmDelete"))
                 .andExpect(model().attributeExists("project"));
     }
 
     @Test
     public void deleteProjectIT() throws Exception {
         // todo add view().name() expectation
-        mockMvc.perform(post("/software/delete"))
+        mockMvc.perform(post("/project/delete"))
                 .andExpect(status().is3xxRedirection());
         verify(projectService, times(1)).delete(any());
     }

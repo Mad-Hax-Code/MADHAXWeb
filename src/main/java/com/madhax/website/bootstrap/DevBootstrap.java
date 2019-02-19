@@ -37,13 +37,13 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         Project project1 = new Project();
         project1.setName("MADHAX Website");
-        project1.setDescription("A website for software projects.");
+        project1.setDescription("A website for project project.");
         project1.setVersion("In development");
         project1.setRepositoryURL("https://github.com/Mad-Hax-Code/MADHAXWeb");
 
         project1.addFeature(new Feature(
                 "Dynamically Add Projects",
-                "The application allows you to add and manage multiple projects."
+                "The application allows you to add and manage multiple project."
         ));
 
         project1.addFeature(new Feature(

@@ -9,15 +9,15 @@
     <div th:replace="fragments/header.html :: header"></div>
     <div id="mainContainer">
         <div id="mainContent">
-            <h2>Software</h2>
+            <h2>Projects</h2>
             <div class="projectList">
-                <a class="add" style="float:right;" th:href="'/software/new'">+</a>
+                <a class="add" style="float:right;" th:href="'/project/new'">+</a>
                 <div class="clr"></div>
             </div>
             <span th:each="project : ${projects}">
             <div class="projectList">
                 <div class="projectListTitle">
-                    <a th:href="'/software/' + ${project.id}"><span style="color:orange;" th:text="${project.name}">Project Title</span></a>
+                    <a th:href="'/project/' + ${project.id}"><span style="color:orange;" th:text="${project.name}">Project Title</span></a>
                     <span style="font-style:italic;" th:text="${project.version}"></span>
                 </div>
                 <div class="projectListBody">
@@ -26,9 +26,9 @@
                         <li th:each="feature : ${project.features}"><span th:text="${feature.title}"></span></li>
                     </ul>
                     <div style="text-align: right;">
-                        <a th:href="'/software/edit/' + ${project.id}">Edit</a> |
-                        <a th:href="'/software/delete/' + ${project.id}">Delete</a> |
-                        <a th:href="'/software/' + ${project.id}">Project page</a>
+                        <a th:href="'/project/' + ${project.id} + '/edit'">Edit</a> |
+                        <a th:href="'/project/' + ${project.id} + '/delete'">Delete</a> |
+                        <a th:href="'/project/' + ${project.id}">Project page</a>
                     </div>
                     <div class="clr"></div>
                 </div>
