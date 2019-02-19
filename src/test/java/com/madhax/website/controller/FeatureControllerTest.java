@@ -61,7 +61,7 @@ public class FeatureControllerTest {
     @Test
     public void newFeature() throws Exception {
         when(projectService.getById(anyLong())).thenReturn(project);
-        mockMvc.perform(get("/project/1/features/new/"))
+        mockMvc.perform(get("/project/1/feature/new/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("/project/feature/addFeature"))
                 .andExpect(model().attributeExists("project"));
@@ -73,7 +73,7 @@ public class FeatureControllerTest {
     public void saveFeature() throws Exception {
         // todo add view().name() expectation
         when(projectService.getById(anyLong())).thenReturn(project);
-        mockMvc.perform(post("/project/1/features/save"))
+        mockMvc.perform(post("/project/1/feature/save"))
                 .andExpect(status().is3xxRedirection());
         verify(projectService, times(1)).getById(anyLong());
         verify(projectService, times(1)).save(any());
@@ -82,7 +82,7 @@ public class FeatureControllerTest {
     @Test
     public void editFeature() throws Exception {
         when(featureService.getById(anyLong())).thenReturn(feature);
-        mockMvc.perform(get("/project/1/features/edit/1"))
+        mockMvc.perform(get("/project/1/feature/edit/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("/project/feature/editFeature"))
                 .andExpect(model().attributeExists("feature"));
@@ -90,14 +90,25 @@ public class FeatureControllerTest {
     }
 
     @Test
-    public void deleteFeatureById() throws Exception {
+    public void confirmDeleteById() throws Exception {
+
+        when(featureService.getById(anyLong())).thenReturn(feature);
+
+        mockMvc.perform(get("/project/1/feature/delete/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/project/feature/confirmDelete"))
+                .andExpect(model().attributeExists("feature"));
+    }
+
+    @Test
+    public void handleDeleteFeatureById() throws Exception {
 
         mockMvc.perform(
-                post("/project/1/features/delete")
+                post("/project/1/feature/delete")
                     .param("featureId", "1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));
 
-        verify(featureService, times(1)).delete(any());
+        verify(featureService, times(1)).deleteById(anyLong());
     }
 }

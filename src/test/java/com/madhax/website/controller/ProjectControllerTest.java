@@ -113,9 +113,11 @@ public class ProjectControllerTest {
 
     @Test
     public void deleteProjectIT() throws Exception {
-        // todo add view().name() expectation
-        mockMvc.perform(post("/project/delete"))
-                .andExpect(status().is3xxRedirection());
-        verify(projectService, times(1)).delete(any());
+        mockMvc.perform(
+                post("/project/delete")
+                        .param("projectId", "1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/project"));
+        verify(projectService, times(1)).deleteById(anyLong());
     }
 }

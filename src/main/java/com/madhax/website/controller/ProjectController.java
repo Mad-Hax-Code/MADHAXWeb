@@ -64,6 +64,6 @@ public class ProjectController {
     public String deleteProject(@RequestParam Long projectId) {
         log.debug("Deleting project with ID: {}", projectId);
         projectService.deleteById(projectId);
-        return "redirect:/project/projectList";
+        return "redirect:/project";
     }
 }

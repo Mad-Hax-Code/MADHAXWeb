@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/project/{projectId}/features")
+@RequestMapping("/project/{projectId}/feature")
 public class FeatureController {
 
     private final Logger log = LoggerFactory.getLogger(FeatureController.class);
@@ -44,8 +44,15 @@ public class FeatureController {
         return "redirect:/project/" + project.getId();
     }
 
+    @GetMapping("/delete/{featureId}")
+    public String confirmDeleteById(@PathVariable Long featureId, Model model) {
+        log.debug("Delete confirmation for feature ID: {}", featureId);
+        model.addAttribute("feature", featureService.getById(featureId));
+        return "/project/feature/confirmDelete";
+    }
+
     @PostMapping("/delete")
-    public String deleteFeatureById(@PathVariable Long projectId, @RequestParam Long featureId) {
+    public String handleDeleteFeatureById(@PathVariable Long projectId, @RequestParam Long featureId) {
         log.debug("Delete feature, project id: {} feature id: {}", projectId, featureId);
         featureService.deleteById(featureId);
         return "redirect:/project/" + projectId;
