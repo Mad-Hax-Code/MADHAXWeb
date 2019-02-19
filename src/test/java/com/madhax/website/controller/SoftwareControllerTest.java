@@ -4,8 +4,12 @@ import com.madhax.website.domain.Project;
 import com.madhax.website.service.ProjectService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -17,11 +21,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class SoftwareControllerTest {
 
     @Mock
     ProjectService projectService;
 
+    @InjectMocks
     SoftwareController controller;
 
     MockMvc mockMvc;
@@ -31,7 +38,6 @@ public class SoftwareControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new SoftwareController(projectService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
         project = new Project();
         project.setId(1L);
@@ -41,7 +47,7 @@ public class SoftwareControllerTest {
 
     @Test
     public void listProjectsIT() throws Exception {
-        // given
+
         Set<Project> projects = new HashSet<>();
         projects.add(project);
 
@@ -51,6 +57,8 @@ public class SoftwareControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("software/softwareList"))
                 .andExpect(model().attributeExists("projects"));
+
+        verify(projectService, times(1)).getAll();
     }
 
     @Test

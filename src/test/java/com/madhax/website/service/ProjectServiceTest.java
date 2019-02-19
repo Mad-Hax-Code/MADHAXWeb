@@ -3,8 +3,9 @@ package com.madhax.website.service;
 import com.madhax.website.domain.Project;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
+@RunWith(SpringRunner.class)
 public class ProjectServiceTest {
 
     @Mock
@@ -20,7 +22,7 @@ public class ProjectServiceTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+
     }
 
     @Test

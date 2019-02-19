@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/details/{id}")
     public String viewUserDetails(@PathVariable long id, Model model) {
-        User user = userService.getById(id).get();
+        User user = userService.getById(id);
         model.addAttribute("user", user);
         return "users/details";
     }

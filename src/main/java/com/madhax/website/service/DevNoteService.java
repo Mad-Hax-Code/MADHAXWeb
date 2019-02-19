@@ -2,6 +2,8 @@ package com.madhax.website.service;
 
 import com.madhax.website.domain.DevNote;
 import com.madhax.website.repository.DevNoteRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -10,6 +12,7 @@ import java.util.Set;
 @Service
 public class DevNoteService {
 
+    private final Logger log = LoggerFactory.getLogger(DevNoteService.class);
     private final DevNoteRepository devNoteRepository;
 
     public DevNoteService(DevNoteRepository devNoteRepository) {

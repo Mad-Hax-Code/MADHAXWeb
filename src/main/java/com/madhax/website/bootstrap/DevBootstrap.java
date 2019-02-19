@@ -5,6 +5,8 @@ import com.madhax.website.domain.Feature;
 import com.madhax.website.domain.Issue;
 import com.madhax.website.domain.Project;
 import com.madhax.website.service.ProjectService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -15,19 +17,22 @@ import java.util.List;
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
+    private final Logger log = LoggerFactory.getLogger(DevBootstrap.class);
     private final ProjectService projectService;
 
     public DevBootstrap(ProjectService projectService) {
         this.projectService = projectService;
+        log.debug("Running constructor...");
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         projectService.saveAll(initData());
+        log.debug("Data loaded.");
     }
 
     private List<Project> initData() {
-
+        log.debug("Initializing data...");
         List<Project> projects = new ArrayList<>();
 
         Project project1 = new Project();

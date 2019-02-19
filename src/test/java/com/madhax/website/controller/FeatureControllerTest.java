@@ -6,8 +6,11 @@ import com.madhax.website.service.FeatureService;
 import com.madhax.website.service.ProjectService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -20,13 +23,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class FeatureControllerTest {
 
     @Mock
     ProjectService projectService;
     @Mock
     FeatureService featureService;
-
+    @InjectMocks
     FeatureController controller;
 
     MockMvc mockMvc;
@@ -37,8 +42,6 @@ public class FeatureControllerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        controller = new FeatureController(projectService, featureService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         project = new Project();

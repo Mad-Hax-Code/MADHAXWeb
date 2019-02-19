@@ -2,31 +2,36 @@ package com.madhax.website.service;
 
 import com.madhax.website.domain.User;
 import com.madhax.website.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<User> getAll() {
         return (List<User>) userRepository.findAll();
     }
 
-    public Optional<User> getById(long id) {
-        return userRepository.findById(id);
+    public User getById(long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     public void delete(User user) {
         userRepository.delete(user);
+    }
+
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
     }
 }

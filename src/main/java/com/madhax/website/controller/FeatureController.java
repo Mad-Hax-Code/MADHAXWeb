@@ -26,17 +26,17 @@ public class FeatureController {
         return "/software/feature/addFeature";
     }
 
+    @GetMapping("/edit/{featureId}")
+    public String editFeature(@PathVariable Long featureId, Model model) {
+        model.addAttribute("feature", featureService.getById(featureId));
+        return "/software/feature/editFeature";
+    }
+
     @PostMapping("/save/{projectId}")
     public String saveFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
         Project project = projectService.getById(projectId);
         project.addFeature(feature);
         projectService.save(project);
         return "redirect:/software/" + project.getId();
-    }
-
-    @GetMapping("/edit/{featureId}")
-    public String editFeature(@PathVariable Long featureId, Model model) {
-        model.addAttribute("feature", featureService.getById(featureId));
-        return "/software/feature/editFeature";
     }
 }
