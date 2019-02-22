@@ -1,38 +1,29 @@
 package com.madhax.website.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class DevNote {
+public class Note extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String title;
     @Lob
     private String message;
     @ManyToOne
     private Project project;
 
-    public DevNote() { }
+    public Note() { }
 
-    public DevNote(String title, String message) {
+    public Note(String title, String message) {
         this.title = title;
         this.message = message;
     }
 
-    public DevNote(String title, String message, Project project) {
+    public Note(String title, String message, Project project) {
         this.title = title;
         this.message = message;
         this.project = project;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {

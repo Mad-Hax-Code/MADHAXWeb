@@ -1,16 +1,21 @@
 package com.madhax.website.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
-public class Feature {
+public class Feature extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Size(min=3, max=255)
     private String title;
+
+    @NotBlank
     @Lob
     private String body;
+
     @ManyToOne
     private Project project;
 
@@ -26,14 +31,6 @@ public class Feature {
         this.title = title;
         this.body = body;
         this.project = project;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {

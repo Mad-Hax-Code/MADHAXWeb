@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head.html :: head">
-    <meta charset="UTF-8">
     <title>MADHAX Software</title>
 </head>
 <body>
@@ -9,9 +8,10 @@
     <div th:replace="fragments/header.html :: header"></div>
     <div id="mainContainer">
         <div id="mainContent">
-            <h2>Delete Project</h2>
+            <h1>400 Bad Request</h1>
+            <p th:text="${exception.getMessage()}"></p>
         </div><!-- end mainContent -->
-    </div><!-- end mainContainer-->
+    </div><!-- end mainContainer -->
     <div th:replace="fragments/footer.html :: footer"></div>
 </div><!-- end container -->
 </body>

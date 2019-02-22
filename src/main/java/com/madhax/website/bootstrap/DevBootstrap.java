@@ -1,8 +1,8 @@
 package com.madhax.website.bootstrap;
 
-import com.madhax.website.domain.DevNote;
 import com.madhax.website.domain.Feature;
 import com.madhax.website.domain.Issue;
+import com.madhax.website.domain.Note;
 import com.madhax.website.domain.Project;
 import com.madhax.website.service.ProjectService;
 import org.slf4j.Logger;
@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        projectService.saveAll(initData());
-        log.debug("Data loaded.");
+        List<Project> projects = initData();
+        log.debug("Saving data...");
+        projectService.saveAll(projects);
+        log.debug("Bootstrap complete.");
     }
 
     private List<Project> initData() {
@@ -56,7 +60,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "Use the log feature to keep a history of development and upcoming improvements"
         ));
 
-        project1.addDevMessage(new DevNote(
+        project1.addDevMessage(new Note(
                 "In Development",
                 "This project is currently in development. No releases have been published as of yet."
         ));
@@ -84,7 +88,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "Set the timeout value for each port in order to customize your scan."
         ));
 
-        project2.addDevMessage(new DevNote(
+        project2.addDevMessage(new Note(
                 "In Development",
                 "This project is currently in development. No releases have been published as of yet."
         ));

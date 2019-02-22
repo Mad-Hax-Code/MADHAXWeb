@@ -1,24 +1,38 @@
 package com.madhax.website.domain;
 
-import javax.persistence.*;
+import org.hibernate.validator.constraints.URL;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Project {
+public class Project extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @NotBlank
+    @Size(min = 3, max=255)
     private String name;
+
+    @NotBlank
     @Lob
     private String description;
+
     private String version;
+
+    @URL
     private String repositoryURL;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private Set<Feature> features = new HashSet<>();
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private Set<DevNote> devNotes = new HashSet<>();
+    private Set<Note> notes = new HashSet<>();
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private Set<Issue> issues = new HashSet<>();
 
@@ -27,14 +41,6 @@ public class Project {
     public Project(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -83,17 +89,17 @@ public class Project {
         return this;
     }
 
-    public Set<DevNote> getDevNotes() {
-        return devNotes;
+    public Set<Note> getNotes() {
+        return notes;
     }
 
-    public void setDevNotes(Set<DevNote> devNotes) {
-        this.devNotes = devNotes;
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
     }
 
-    public Project addDevMessage(DevNote devNote) {
-        devNote.setProject(this);
-        this.devNotes.add(devNote);
+    public Project addDevMessage(Note note) {
+        note.setProject(this);
+        this.notes.add(note);
         return this;
     }
 

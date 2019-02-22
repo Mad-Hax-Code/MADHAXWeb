@@ -1,13 +1,12 @@
 package com.madhax.website.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Issue {
+public class Issue extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String title;
     @Lob
     private String body;
@@ -29,14 +28,6 @@ public class Issue {
         this.body = body;
         this.issueType = issueType;
         this.project = project;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {

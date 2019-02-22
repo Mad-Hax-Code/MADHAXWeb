@@ -63,7 +63,7 @@ public class FeatureControllerTest {
         when(projectService.getById(anyLong())).thenReturn(project);
         mockMvc.perform(get("/project/1/feature/new/"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/project/feature/addFeature"))
+                .andExpect(view().name(controller.FEATURE_FORM_URL))
                 .andExpect(model().attributeExists("project"));
 
         verify(projectService, times(1)).getById(anyLong());
@@ -84,7 +84,7 @@ public class FeatureControllerTest {
         when(featureService.getById(anyLong())).thenReturn(feature);
         mockMvc.perform(get("/project/1/feature/edit/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/project/feature/editFeature"))
+                .andExpect(view().name(controller.FEATURE_FORM_URL))
                 .andExpect(model().attributeExists("feature"));
         verify(featureService, times(1)).getById(anyLong());
     }
@@ -96,7 +96,7 @@ public class FeatureControllerTest {
 
         mockMvc.perform(get("/project/1/feature/delete/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/project/feature/confirmDelete"))
+                .andExpect(view().name(controller.CONFIRM_DELETE_URL))
                 .andExpect(model().attributeExists("feature"));
     }
 

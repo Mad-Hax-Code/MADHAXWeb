@@ -1,6 +1,7 @@
 package com.madhax.website.controller;
 
 import com.madhax.website.domain.Project;
+import com.madhax.website.exceptions.NotFoundException;
 import com.madhax.website.service.ProjectService;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -25,6 +27,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class ProjectControllerTest {
 
+    private final String BAD_REQUEST_URL = "400error";
+    private final String NOT_FOUND_URL = "404error";
+
     @Mock
     ProjectService projectService;
 
@@ -38,7 +43,9 @@ public class ProjectControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ExceptionHandlerController())
+                .build();
         project = new Project();
         project.setId(1L);
         project.setName("My Project");
@@ -55,7 +62,7 @@ public class ProjectControllerTest {
 
         mockMvc.perform(get("/project"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("project/projectList"))
+                .andExpect(view().name(controller.PROJECT_LIST_URL))
                 .andExpect(model().attributeExists("projects"));
 
         verify(projectService, times(1)).getAll();
@@ -68,8 +75,27 @@ public class ProjectControllerTest {
 
         mockMvc.perform(get("/project/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("project/viewProject"))
+                .andExpect(view().name(controller.VIEW_PROJECT_URL))
                 .andExpect(model().attributeExists("project"));
+    }
+
+    @Test
+    public void showProjectNotFoundExceptionIT() throws Exception {
+
+        when(projectService.getById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/project/1"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name(NOT_FOUND_URL));
+    }
+
+    @Test
+    public void showProjectNumberFormatExceptionIT() throws Exception {
+
+        mockMvc.perform(get("/project/asdf"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name(BAD_REQUEST_URL));
+
     }
 
     @Test
@@ -77,8 +103,40 @@ public class ProjectControllerTest {
 
         mockMvc.perform(get("/project/new"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("project/newProject"))
+                .andExpect(view().name(controller.PROJECT_FORM_URL))
                 .andExpect(model().attributeExists("project"));
+    }
+
+    @Test
+    public void projectFormSubmissionIT() throws Exception {
+
+        when(projectService.save(any())).thenReturn(project);
+
+        mockMvc.perform(
+                post("/project/save")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                    .param("name", "My Project")
+                    .param("description", "Project description."))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/project/1"));
+
+        verify(projectService, times(1)).save(any());
+    }
+
+    @Test
+    public void projectFormValidationFailIT() throws Exception {
+        Project project = new Project();
+        project.setId(2L);
+
+        when(projectService.save(any())).thenReturn(project);
+
+        mockMvc.perform(
+                post("/project/save")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                    .param("id", ""))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("project"))
+                .andExpect(view().name(controller.PROJECT_FORM_URL));
     }
 
     @Test
@@ -88,16 +146,8 @@ public class ProjectControllerTest {
 
         mockMvc.perform(get("/project/1/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("project/editProject"))
+                .andExpect(view().name(controller.PROJECT_FORM_URL))
                 .andExpect(model().attributeExists("project"));
-    }
-
-    @Test
-    public void saveProjectIT() throws Exception {
-        // todo add view().name() expectation
-        mockMvc.perform(post("/project/save"))
-                .andExpect(status().is3xxRedirection());
-        verify(projectService, times(1)).save(any());
     }
 
     @Test
@@ -107,7 +157,7 @@ public class ProjectControllerTest {
 
         mockMvc.perform(get("/project/1/delete"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("project/confirmDelete"))
+                .andExpect(view().name(controller.CONFIRM_DELETE_URL))
                 .andExpect(model().attributeExists("project"));
     }
 

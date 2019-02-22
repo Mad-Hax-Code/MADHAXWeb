@@ -30,9 +30,9 @@
                     </ul>
                 </li>
             </ol>
-            <h3 style="color:darkorange;" th:if="${not project.devNotes.isEmpty()}">Development Log</h3>
+            <h3 style="color:darkorange;" th:if="${not project.notes.isEmpty()}">Development Log</h3>
             <ul>
-                <li th:each="log : ${project.devNotes}">
+                <li th:each="log : ${project.notes}">
                     <span style="font-weight:bold;" th:text="${log.title}"></span>
                     <ul>
                         <li style="list-style: none;" th:text="${log.message}"></li>

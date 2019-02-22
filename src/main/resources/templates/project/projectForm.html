@@ -10,7 +10,7 @@
     <div id="mainContainer">
         <div id="mainContent">
             <h2>New Project</h2>
-            <form th:action="@{/software/save}" th:object="${project}" method="post">
+            <form th:action="@{/project/save}" th:object="${project}" method="post">
                 <input type="text" name="projectName" th:field="*{name}" placeholder="Project Name"/><br />
                 <input type="text" name="projectRepo" th:field="*{repositoryURL}" placeholder="Repository URL"/><br />
                 <textarea type="text" name="projectDescription" th:field="*{description}" placeholder="Project description."></textarea><br />

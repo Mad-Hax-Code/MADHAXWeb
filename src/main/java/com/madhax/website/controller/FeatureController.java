@@ -16,6 +16,9 @@ public class FeatureController {
 
     private final Logger log = LoggerFactory.getLogger(FeatureController.class);
 
+    protected final String FEATURE_FORM_URL = "project/feature/featureForm";
+    protected final String CONFIRM_DELETE_URL = "project/feature/confirmDelete";
+
     private final ProjectService projectService;
     private final FeatureService featureService;
 
@@ -27,13 +30,13 @@ public class FeatureController {
     @GetMapping("/new")
     public String newFeature(Model model, @PathVariable Long projectId) {
         model.addAttribute("project", projectService.getById(projectId));
-        return "/project/feature/addFeature";
+        return FEATURE_FORM_URL;
     }
 
     @GetMapping("/edit/{featureId}")
     public String editFeature(@PathVariable Long featureId, Model model) {
         model.addAttribute("feature", featureService.getById(featureId));
-        return "/project/feature/editFeature";
+        return FEATURE_FORM_URL;
     }
 
     @PostMapping("/save")
@@ -48,7 +51,7 @@ public class FeatureController {
     public String confirmDeleteById(@PathVariable Long featureId, Model model) {
         log.debug("Delete confirmation for feature ID: {}", featureId);
         model.addAttribute("feature", featureService.getById(featureId));
-        return "/project/feature/confirmDelete";
+        return CONFIRM_DELETE_URL;
     }
 
     @PostMapping("/delete")
