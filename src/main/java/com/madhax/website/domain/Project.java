@@ -97,7 +97,7 @@ public class Project extends BaseEntity {
         this.notes = notes;
     }
 
-    public Project addDevMessage(Note note) {
+    public Project addNote(Note note) {
         note.setProject(this);
         this.notes.add(note);
         return this;

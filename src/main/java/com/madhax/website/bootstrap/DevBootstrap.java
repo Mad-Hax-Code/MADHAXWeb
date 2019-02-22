@@ -1,9 +1,6 @@
 package com.madhax.website.bootstrap;
 
-import com.madhax.website.domain.Feature;
-import com.madhax.website.domain.Issue;
-import com.madhax.website.domain.Note;
-import com.madhax.website.domain.Project;
+import com.madhax.website.domain.*;
 import com.madhax.website.service.ProjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +57,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "Use the log feature to keep a history of development and upcoming improvements"
         ));
 
-        project1.addDevMessage(new Note(
+        project1.addNote(new Note(
                 "In Development",
                 "This project is currently in development. No releases have been published as of yet."
         ));
@@ -88,15 +85,17 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "Set the timeout value for each port in order to customize your scan."
         ));
 
-        project2.addDevMessage(new Note(
+        project2.addNote(new Note(
                 "In Development",
                 "This project is currently in development. No releases have been published as of yet."
         ));
 
-        project2.addIssue(new Issue(
-                "Wrong Port Count",
-                "ScanResult port count is returning incorrect value."
-        ));
+        Issue issue1 = new Issue();
+        issue1.setIssueType(IssueType.BUG);
+        issue1.setTitle("Wrong Port Count");
+        issue1.setBody("ScanResult port count is returning incorrect value.");
+
+        project2.addIssue(issue1);
 
         projects.add(project2);
 

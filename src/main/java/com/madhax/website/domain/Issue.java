@@ -1,8 +1,6 @@
 package com.madhax.website.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Issue extends BaseEntity {
@@ -11,6 +9,7 @@ public class Issue extends BaseEntity {
     @Lob
     private String body;
 
+    @Enumerated(value = EnumType.STRING)
     private IssueType issueType;
 
     @ManyToOne
