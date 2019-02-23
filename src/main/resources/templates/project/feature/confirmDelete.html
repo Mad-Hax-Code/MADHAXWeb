@@ -11,7 +11,7 @@
         <div id="mainContent">
             <!--/*@thymesVar id="feature" type="com.madhax.website.domain.Feature"*/-->
             <h2>Delete Feature</h2>
-            <p>Are you sure you want to permanently delete the project: <span th:text="${feature.title}"></span></p>
+            <p>Are you sure you want to permanently delete the feature: <span th:text="${feature.title}"></span></p>
             <form th:action="@{/project/{projectId}/feature/delete(projectId=${feature.getProject().id})}" method="post">
                 <input type="submit" name="submit" value="Yes, delete project" />
                 <input type="hidden" name="featureId" th:value="${feature.id}" />

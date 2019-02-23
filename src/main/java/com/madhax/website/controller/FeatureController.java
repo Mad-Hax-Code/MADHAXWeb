@@ -30,17 +30,24 @@ public class FeatureController {
     @GetMapping("/new")
     public String newFeature(Model model, @PathVariable Long projectId) {
         model.addAttribute("project", projectService.getById(projectId));
+        model.addAttribute("feature", new Feature());
         return FEATURE_FORM_URL;
     }
 
-    @GetMapping("/edit/{featureId}")
+    @PostMapping("/new")
+    public String saveNewFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
+
+        return "redirect:/project/" + projectId;
+    }
+
+    @GetMapping("/{featureId}/edit")
     public String editFeature(@PathVariable Long featureId, Model model) {
         model.addAttribute("feature", featureService.getById(featureId));
         return FEATURE_FORM_URL;
     }
 
-    @PostMapping("/save")
-    public String saveFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
+    @PostMapping("/edit")
+    public String saveEditedFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
         Project project = projectService.getById(projectId);
         project.addFeature(feature);
         projectService.save(project);

@@ -13,11 +13,17 @@
             <p th:text="${project.description}"></p>
             <b>Repository: </b><a target="new" th:href="${project.repositoryURL}" th:text="${project.repositoryURL}"></a>
             <h3 style="color:darkorange;" th:if="${not project.features.isEmpty()}">Features</h3>
-            <ul>
+            <a class="add" style="font-size:1em;" th:href="@{/project/{projectId}/feature/new(projectId=${project.id})}">+ New Feature</a>
+            <ul th:if="${not project.features.isEmpty()}">
                 <li th:each="feature : ${project.features}">
                     <span style="font-weight:bold;" th:text="${feature.title}"></span>
                     <ul>
-                        <li style="list-style: none;" th:text="${feature.body}">Body</li>
+                        <li style="list-style: none;">
+                            <span th:text="${feature.body}"></span>
+                            <a th:href="@{/project/{projectId}/feature/{featureId}/edit(projectId=${feature.project.id}, featureId=${feature.id})}">Edit</a>
+                            |
+                            <a th:href="@{/project/{projectId}/feature/{featureId}/delete(projectId=${feature.project.id}, featureId=${feature.id})}">Delete</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
