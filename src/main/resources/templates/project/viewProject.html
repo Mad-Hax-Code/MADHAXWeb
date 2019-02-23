@@ -42,12 +42,12 @@
                 <li th:each="note : ${project.notes}">
                     <span style="font-weight:bold;" th:text="${note.title}"></span>
                     <ul>
-                        <li style="list-style: none;" th:text="${note.message}"><a th:href=""></a></li>
+                        <li style="list-style: none;">
+                            <span th:text="${note.message}"></span>
+                            <a th:href="@{project/{projectId}/note/{noteId}/edit(projectId=${project.id}, noteId=${note.id})}">Edit</a> |
+                            <a th:href="'/project/' + ${project.id} + '/delete'">Delete</a>
+                        </li>
                     </ul>
-                    <div style="text-align: right;">
-                        <a th:href="'/project/' + ${project.id} + '/edit'">Edit</a> |
-                        <a th:href="'/project/' + ${project.id} + '/delete'">Delete</a> |
-                    </div>
                 </li>
             </ul>
         </div><!-- end mainContent -->
