@@ -22,20 +22,26 @@
                 </li>
             </ul>
             <h3 style="color:darkorange;" th:if="${not project.issues.isEmpty()}">Known Issues</h3>
+            <a class="add" style="font-size:1em;" th:href="@{/project/{projectId}/issue/new(projectId=${project.id})}">+ New Issue</a>
             <ol th:if="${not project.issues.isEmpty()}">
                 <li th:each="issue : ${project.issues}">
                     <span style="font-weight:bold;" th:text="${issue.title}"></span>
                     <ul>
-                        <li style="list-style: none;" th:text="${issue.message}"></li>
+                        <li style="list-style: none;">
+                            <span th:text="${issue.message}"></span>
+                            <a th:href="@{/project/{projectId}/issue/{issueId}/edit(projectId=${issue.project.id}, issueId=${issue.id})}">
+                                Edit
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ol>
             <h3 style="color:darkorange;" th:if="${not project.notes.isEmpty()}">Development Log</h3>
             <ul>
-                <li th:each="log : ${project.notes}">
-                    <span style="font-weight:bold;" th:text="${log.title}"></span>
+                <li th:each="note : ${project.notes}">
+                    <span style="font-weight:bold;" th:text="${note.title}"></span>
                     <ul>
-                        <li style="list-style: none;" th:text="${log.message}"></li>
+                        <li style="list-style: none;" th:text="${note.message}"><a th:href=""></a></li>
                     </ul>
                 </li>
             </ul>

@@ -10,11 +10,17 @@
     <div id="mainContainer">
         <div id="mainContent">
             <h2>Add Issue</h2>
-            <!--/*@thymesVar id="project" type="com.madhax.website.domain.Issue"*/-->
-            <form th:action="${issue.id > 0} ? @{/project/{projectId}/issue/edit(projectId=${issue.project.id})} : @{/project/} + ${projectId} + '/issue/new'" th:object="${issue}" method="post">
+            <!--/*@thymesVar id="issue" type="com.madhax.website.domain.Issue"*/-->
+            <form th:action="${issue?.id > 0}
+            ? @{/project/{projectId}/issue/edit(projectId=${issue.project.id})}
+            : @{/project/{projectId}/issue/new(projectId=${projectId})}" th:object="${issue}" method="post">
                 <input type="text" name="issueTitle" th:field="*{title}" placeholder="Project Name"/><br />
+                <select name="issueType" th:field="*{issueType}">
+                    <option th:each="type : ${issueTypes}" th:value="${type.name()}" th:text="${type.name()}">val</option>
+                </select><br />
                 <textarea type="text" name="issueBody" th:field="*{message}" placeholder="Project description."></textarea><br />
                 <input th:if="${issue.id > 0}" type="hidden" name="issueId" th:field="*{id}" />
+                <input th:if="${issue.project?.id > 0}" type="hidden" th:field="*{project}" />
                 <input type="submit" name="submit" th:value="submit" />
             </form>
         </div><!-- end mainContent -->
