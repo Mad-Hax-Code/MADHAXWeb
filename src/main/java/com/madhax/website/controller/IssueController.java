@@ -50,7 +50,6 @@ public class IssueController {
     @GetMapping("/{issueId}/edit")
     public String editIssue(@PathVariable Long issueId, Model model) {
         model.addAttribute("issue", issueService.getById(issueId));
-        //model.addAttribute("projectId", projectId);
         model.addAttribute("issueTypes", IssueType.values());
         return ISSUE_FORM_URL;
     }
@@ -74,5 +73,4 @@ public class IssueController {
         issueService.deleteById(issueId);
         return "redirect:/project/" + projectId;
     }
-
 }
