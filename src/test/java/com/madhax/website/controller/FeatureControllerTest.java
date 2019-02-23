@@ -70,19 +70,14 @@ public class FeatureControllerTest {
     }
 
     @Test
-    public void saveFeature() throws Exception {
-        // todo add view().name() expectation
-        when(projectService.getById(anyLong())).thenReturn(project);
-        mockMvc.perform(post("/project/1/feature/save"))
-                .andExpect(status().is3xxRedirection());
-        verify(projectService, times(1)).getById(anyLong());
-        verify(projectService, times(1)).save(any());
+    public void saveNewFeature() throws Exception {
+
     }
 
     @Test
     public void editFeature() throws Exception {
         when(featureService.getById(anyLong())).thenReturn(feature);
-        mockMvc.perform(get("/project/1/feature/edit/1"))
+        mockMvc.perform(get("/project/1/feature/1/edit"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(controller.FEATURE_FORM_URL))
                 .andExpect(model().attributeExists("feature"));
@@ -90,11 +85,23 @@ public class FeatureControllerTest {
     }
 
     @Test
+    public void saveEditedFeature() throws Exception {
+
+        when(featureService.save(any())).thenReturn(feature);
+
+        mockMvc.perform(post("/project/1/feature/edit"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/project/1"));
+
+        verify(featureService, times(1)).save(any());
+    }
+
+    @Test
     public void confirmDeleteById() throws Exception {
 
         when(featureService.getById(anyLong())).thenReturn(feature);
 
-        mockMvc.perform(get("/project/1/feature/delete/1"))
+        mockMvc.perform(get("/project/1/feature/1/delete"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(controller.CONFIRM_DELETE_URL))
                 .andExpect(model().attributeExists("feature"));
