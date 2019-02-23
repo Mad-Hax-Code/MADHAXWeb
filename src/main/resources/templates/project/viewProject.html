@@ -32,6 +32,10 @@
                             <a th:href="@{/project/{projectId}/issue/{issueId}/edit(projectId=${issue.project.id}, issueId=${issue.id})}">
                                 Edit
                             </a>
+                            |
+                            <a th:href="@{/project/{projectId}/issue/{issueId}/delete(projectId=${issue.project.id}, issueId=${issue.id})}">
+                                Delete
+                            </a>
                         </li>
                     </ul>
                 </li>

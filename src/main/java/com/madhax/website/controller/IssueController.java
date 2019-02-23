@@ -73,5 +73,4 @@ public class IssueController {
         issueService.deleteById(issueId);
         return "redirect:/project/" + projectId;
     }
-
 }

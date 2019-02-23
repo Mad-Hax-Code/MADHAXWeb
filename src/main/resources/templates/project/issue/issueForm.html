@@ -9,7 +9,7 @@
     <div th:replace="fragments/header.html :: header"></div>
     <div id="mainContainer">
         <div id="mainContent">
-            <h2>Add Issue</h2>
+            <h2>Add/Edit Issue</h2>
             <!--/*@thymesVar id="issue" type="com.madhax.website.domain.Issue"*/-->
             <form th:action="${issue?.id > 0}
             ? @{/project/{projectId}/issue/edit(projectId=${issue.project.id})}

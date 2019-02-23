@@ -12,7 +12,7 @@
             <h2>Delete Issue</h2>
             <p>Deleting issues is not recommended, best practice is to close the issue instead.</p>
             <p>Are you sure you want to permanently delete the issue: <span th:text="${issue.title}"></span>?</p>
-            <form th:action="@{/project/issue/delete}" method="post">
+            <form th:action="@{/project/{projectId}/issue/delete(projectId=${issue.project.id})}" method="post">
                 <input type="submit" name="submit" value="Yes, delete issue" />
                 <input type="hidden" name="issueId" th:value="${issue.id}" />
             </form>
