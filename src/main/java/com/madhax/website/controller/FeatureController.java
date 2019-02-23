@@ -30,33 +30,41 @@ public class FeatureController {
     @GetMapping("/new")
     public String newFeature(Model model, @PathVariable Long projectId) {
         model.addAttribute("project", projectService.getById(projectId));
+        model.addAttribute("feature", new Feature());
         return FEATURE_FORM_URL;
     }
 
-    @GetMapping("/edit/{featureId}")
-    public String editFeature(@PathVariable Long featureId, Model model) {
-        model.addAttribute("feature", featureService.getById(featureId));
-        return FEATURE_FORM_URL;
-    }
-
-    @PostMapping("/save")
-    public String saveFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
+    @PostMapping("/new")
+    public String saveNewFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
         Project project = projectService.getById(projectId);
         project.addFeature(feature);
         projectService.save(project);
         return "redirect:/project/" + project.getId();
     }
 
-    @GetMapping("/delete/{featureId}")
+    @GetMapping("/{featureId}/edit")
+    public String editFeature(@PathVariable Long featureId, Model model) {
+        model.addAttribute("feature", featureService.getById(featureId));
+        return FEATURE_FORM_URL;
+    }
+
+    @PostMapping("/edit")
+    public String saveEditedFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
+        log.info("Updating feature ID: {} for project: {}", feature.getId(), projectId);
+        Feature savedFeature = featureService.save(feature);
+        return "redirect:/project/" + savedFeature.getProject().getId();
+    }
+
+    @GetMapping("/{featureId}/delete")
     public String confirmDeleteById(@PathVariable Long featureId, Model model) {
-        log.debug("Delete confirmation for feature ID: {}", featureId);
+        log.info("Delete confirmation for feature ID: {}", featureId);
         model.addAttribute("feature", featureService.getById(featureId));
         return CONFIRM_DELETE_URL;
     }
 
     @PostMapping("/delete")
     public String handleDeleteFeatureById(@PathVariable Long projectId, @RequestParam Long featureId) {
-        log.debug("Delete feature, project id: {} feature id: {}", projectId, featureId);
+        log.info("Deleting feature id: {}", featureId);
         featureService.deleteById(featureId);
         return "redirect:/project/" + projectId;
     }

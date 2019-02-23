@@ -9,7 +9,16 @@
     <div th:replace="fragments/header.html :: header"></div>
     <div id="mainContainer">
         <div id="mainContent">
-            <h2>Add Feature</h2>
+            <h2>Add/Edit Feature</h2>
+            <form th:action="${feature?.id > 0}
+            ? @{/project/{projectId}/feature/edit(projectId=${feature.project.id})}
+            : @{/project/{projectId}/feature/new(projectId=${projectId})}" th:object="${feature}" method="post">
+                <input type="text" name="issueTitle" th:field="*{title}" placeholder="Project Name"/><br />
+                <textarea type="text" name="issueBody" th:field="*{body}" placeholder="Project description."></textarea><br />
+                <input th:if="${feature.id > 0}" type="hidden" name="issueId" th:field="*{id}" />
+                <input th:if="${feature.project?.id > 0}" type="hidden" th:field="*{project}" />
+                <input type="submit" name="submit" th:value="submit" />
+            </form>
         </div><!-- end mainContent -->
     </div><!-- end mainContainer-->
     <div th:replace="fragments/footer.html :: footer"></div>
