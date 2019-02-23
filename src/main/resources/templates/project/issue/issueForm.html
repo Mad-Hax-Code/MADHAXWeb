@@ -10,6 +10,7 @@
     <div id="mainContainer">
         <div id="mainContent">
             <h2>Add Issue</h2>
+            <!--fake comment-->
             <!--/*@thymesVar id="issue" type="com.madhax.website.domain.Issue"*/-->
             <form th:action="${issue?.id > 0}
             ? @{/project/{projectId}/issue/edit(projectId=${issue.project.id})}
