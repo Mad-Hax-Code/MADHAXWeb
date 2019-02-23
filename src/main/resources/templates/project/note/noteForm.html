@@ -10,7 +10,7 @@
     <div id="mainContainer">
         <div id="mainContent">
             <h2>Add Development Message</h2>
-            <form th:action="@{note?.id > 0}
+            <form th:action="${note?.id > 0}
             ? @{/project/{projectId}/note/edit(projectId=${note.project.id})}
             : @{/project/{projectId}/note/new(projectId=${projectId})}" th:object="${note}" method="post">
                 <input type="text" name="NoteName" th:field="*{title}" placeholder="Note Name"/><br />
