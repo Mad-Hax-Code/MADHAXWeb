@@ -90,12 +90,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "This project is currently in development. No releases have been published as of yet."
         ));
 
-        Issue issue1 = new Issue();
-        issue1.setIssueType(IssueType.BUG);
-        issue1.setTitle("Wrong Port Count");
-        issue1.setBody("ScanResult port count is returning incorrect value.");
-
-        project2.addIssue(issue1);
+        project2.addIssue(new Issue(
+                "Wrong Port Count",
+                "ScanResult port count is returning incorrect value.",
+                IssueType.BUG));
 
         projects.add(project2);
 

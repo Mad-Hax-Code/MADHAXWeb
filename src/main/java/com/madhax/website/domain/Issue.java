@@ -7,7 +7,7 @@ public class Issue extends BaseEntity {
 
     private String title;
     @Lob
-    private String body;
+    private String message;
 
     @Enumerated(value = EnumType.STRING)
     private IssueType issueType;
@@ -17,14 +17,15 @@ public class Issue extends BaseEntity {
 
     public Issue() { }
 
-    public Issue(String title, String body) {
+    public Issue(String title, String message, IssueType issueType) {
         this.title = title;
-        this.body = body;
+        this.message = message;
+        this.issueType = issueType;
     }
 
-    public Issue(String title, String body, IssueType issueType, Project project) {
+    public Issue(String title, String message, IssueType issueType, Project project) {
         this.title = title;
-        this.body = body;
+        this.message = message;
         this.issueType = issueType;
         this.project = project;
     }
@@ -37,12 +38,12 @@ public class Issue extends BaseEntity {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
+    public String getMessage() {
+        return message;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public IssueType getIssueType() {

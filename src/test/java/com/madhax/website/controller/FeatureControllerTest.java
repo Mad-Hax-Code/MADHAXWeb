@@ -98,6 +98,7 @@ public class FeatureControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name(controller.CONFIRM_DELETE_URL))
                 .andExpect(model().attributeExists("feature"));
+        verify(featureService, times(1)).getById(anyLong());
     }
 
     @Test

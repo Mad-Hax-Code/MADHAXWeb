@@ -21,7 +21,7 @@
                     <span style="font-style:italic;" th:text="${project.version}"></span>
                 </div>
                 <div class="projectListBody">
-                    <span th:text="${project.description}">Project body.</span>
+                    <span th:text="${project.description}">Project message.</span>
                     <ul>
                         <li th:each="feature : ${project.features}"><span th:text="${feature.title}"></span></li>
                     </ul>

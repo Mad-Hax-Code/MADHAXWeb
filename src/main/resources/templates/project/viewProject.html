@@ -22,11 +22,11 @@
                 </li>
             </ul>
             <h3 style="color:darkorange;" th:if="${not project.issues.isEmpty()}">Known Issues</h3>
-            <ol>
+            <ol th:if="${not project.issues.isEmpty()}">
                 <li th:each="issue : ${project.issues}">
                     <span style="font-weight:bold;" th:text="${issue.title}"></span>
                     <ul>
-                        <li style="list-style: none;" th:text="${issue.body}"></li>
+                        <li style="list-style: none;" th:text="${issue.message}"></li>
                     </ul>
                 </li>
             </ol>
