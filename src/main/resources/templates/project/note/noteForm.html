@@ -10,10 +10,13 @@
     <div id="mainContainer">
         <div id="mainContent">
             <h2>Add Development Message</h2>
-            <form th:action="@{/project/ + '{projectId}' + /note" th:object="${note}" method="post">
+            <form th:action="${note?.id > 0}
+            ? @{/project/{projectId}/note/edit(projectId=${note.project.id})}
+            : @{/project/{projectId}/note/new(projectId=${projectId})}" th:object="${note}" method="post">
                 <input type="text" name="NoteName" th:field="*{title}" placeholder="Note Name"/><br />
                 <textarea type="text" name="NoteMessage" th:field="*{message}" placeholder="Note Message."></textarea><br />
-                <!-- <input th:if="${project.id > 0}" type="hidden" name="projectId" th:field="*{id}" /> -->
+                <input th:if="${note.id > 0}" type="hidden" name="noteId" th:field="*{id}" />
+                <input th:if="${note.project?.id > 0}" type="hidden" th:field="*{project}" />
                 <input type="submit" name="submit" th:value="submit" />
             </form>
         </div><!-- end mainContent -->

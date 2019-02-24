@@ -47,11 +47,16 @@
                 </li>
             </ol>
             <h3 style="color:darkorange;" th:if="${not project.notes.isEmpty()}">Development Log</h3>
+            <a class="add" style="font-size:1em;" th:href="@{/project/{projectId}/note/new(projectId=${project.id})}">+ New Note</a>
             <ul>
                 <li th:each="note : ${project.notes}">
                     <span style="font-weight:bold;" th:text="${note.title}"></span>
                     <ul>
-                        <li style="list-style: none;" th:text="${note.message}"><a th:href=""></a></li>
+                        <li style="list-style: none;">
+                            <span th:text="${note.message}"></span>
+                            <a th:href="@{/project/{projectId}/note/{noteId}/edit(projectId=${project.id}, noteId=${note.id})}">Edit</a> |
+                            <a th:href="@{/project/{projectId}/note/{noteId}/delete(projectId=${project.id}, noteId=${note.id})}">Delete</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
