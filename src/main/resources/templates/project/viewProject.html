@@ -44,8 +44,8 @@
                     <ul>
                         <li style="list-style: none;">
                             <span th:text="${note.message}"></span>
-                            <a th:href="@{project/{projectId}/note/{noteId}/edit(projectId=${project.id}, noteId=${note.id})}">Edit</a> |
-                            <a th:href="'/project/' + ${project.id} + '/delete'">Delete</a>
+                            <a th:href="@{/project/{projectId}/note/{noteId}/edit(projectId=${project.id}, noteId=${note.id})}">Edit</a> |
+                            <a th:href="@{/project/{projectId}/note/{noteId}/delete(projectId=${project.id}, noteId=${note.id})}">Delete</a>
                         </li>
                     </ul>
                 </li>

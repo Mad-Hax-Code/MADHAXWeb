@@ -12,7 +12,7 @@
             <h2>Delete Note</h2>
             <p>Are you sure you want to permanently delete the note: <span th:text="${note.title}"></span>?</p>
             <form th:action="@{/project/note/delete}" method="post">
-                <input type="submit" name="submit" value="Yes, delete issue" />
+                <input type="submit" name="submit" value="Yes, delete note" />
                 <input type="hidden" name="issueId" th:value="${note.id}" />
             </form>
         </div><!-- end mainContent -->
