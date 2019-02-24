@@ -1,6 +1,5 @@
 package com.madhax.website.controller;
 
-import com.madhax.website.domain.IssueType;
 import com.madhax.website.domain.Note;
 import com.madhax.website.domain.Project;
 import com.madhax.website.service.NoteService;
@@ -64,10 +63,9 @@ public class NoteController {
     }
 
     @PostMapping("/delete")
-    public String handleDeleteNoteById(@RequestParam Note note) {
-        log.debug("Deleting note with ID: {}", noteService.getById(note.getId()));
-        Long projectId = noteService.getById(note.getId()).getProject().getId();
-        noteService.deleteById(note.getId());
+    public String handleDeleteNoteById(@RequestParam Long issueId, @PathVariable Long projectId) {
+        log.debug("Deleting note with ID: {}", issueId);
+        noteService.deleteById(issueId);
         return "redirect:/project/" + projectId;
     }
 
