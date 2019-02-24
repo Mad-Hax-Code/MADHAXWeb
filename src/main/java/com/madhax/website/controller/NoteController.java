@@ -64,8 +64,10 @@ public class NoteController {
     }
 
     @PostMapping("/delete")
-    public String handleDeleteNoteById(@PathVariable Long projectId, @RequestParam Long noteId) {
-        noteService.deleteById(noteId);
+    public String handleDeleteNoteById(@RequestParam Note note) {
+        log.debug("Deleting note with ID: {}", noteService.getById(note.getId()));
+        Long projectId = noteService.getById(note.getId()).getProject().getId();
+        noteService.deleteById(note.getId());
         return "redirect:/project/" + projectId;
     }
 
