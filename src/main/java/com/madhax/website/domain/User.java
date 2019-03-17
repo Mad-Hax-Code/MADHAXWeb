@@ -1,25 +1,27 @@
 package com.madhax.website.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User extends BaseEntity {
 
     @Column(unique = true)
     private String username;
+
     private String password;
     private String firstName;
     private String lastName;
-    private String role;
+    private Integer active;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "user_role",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
 
     public User() { }
-
-    public User(String username, String password, String role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
 
     public String getUsername() {
         return username;
@@ -53,11 +55,19 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public String getRole() {
-        return role;
+    public Integer getActive() {
+        return active;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setActive(Integer active) {
+        this.active = active;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

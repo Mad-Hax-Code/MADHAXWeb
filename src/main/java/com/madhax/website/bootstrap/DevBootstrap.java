@@ -26,13 +26,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        List<Project> projects = initData();
-        log.debug("Saving data...");
-        projectService.saveAll(projects);
+        log.debug("Loading bootstrap data...");
+        initData();
         log.debug("Bootstrap complete.");
     }
 
-    private List<Project> initData() {
+    private void initData() {
         log.debug("Initializing data...");
         List<Project> projects = new ArrayList<>();
 
@@ -97,6 +96,16 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         projects.add(project2);
 
-        return projects;
+        log.debug("Saving projects...");
+        projectService.saveAll(projects);
+
+
+
+        User user1 = new User();
+        user1.setUsername("jsmith");
+        user1.setFirstName("John");
+        user1.setLastName("Smith");
+        user1.setActive(1);
+
     }
 }
