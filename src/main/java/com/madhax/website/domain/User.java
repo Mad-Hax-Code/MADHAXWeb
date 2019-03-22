@@ -1,25 +1,29 @@
 package com.madhax.website.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Collection;
 
 @Entity
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
 
-    @Column(unique = true)
+    @Column(name = "username", unique = true)
     private String username;
 
+    @Column(name = "password")
     private String password;
+
     private String firstName;
     private String lastName;
-    private Integer active;
+    private Boolean enabled;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "user_role",
+    @JoinTable(name = "user_authority",
         joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
-
+        inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    private Collection<Authority> authorities;
 
     public User() { }
 
@@ -55,19 +59,40 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public Integer getActive() {
-        return active;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setActive(Integer active) {
-        this.active = active;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
+
+    public void setAuthorities(Collection<Authority> authorities) {
+        this.authorities = authorities;
     }
 }

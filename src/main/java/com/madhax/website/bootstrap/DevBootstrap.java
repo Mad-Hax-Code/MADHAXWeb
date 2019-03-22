@@ -1,15 +1,20 @@
 package com.madhax.website.bootstrap;
 
 import com.madhax.website.domain.*;
+import com.madhax.website.service.AuthorityService;
 import com.madhax.website.service.ProjectService;
+import com.madhax.website.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -17,9 +22,16 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     private final Logger log = LoggerFactory.getLogger(DevBootstrap.class);
     private final ProjectService projectService;
+    private final UserService userService;
+    private final AuthorityService authorityService;
 
-    public DevBootstrap(ProjectService projectService) {
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    public DevBootstrap(ProjectService projectService, UserService userService, AuthorityService authorityService) {
         this.projectService = projectService;
+        this.userService = userService;
+        this.authorityService = authorityService;
         log.debug("Running constructor...");
     }
 
@@ -99,13 +111,26 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         log.debug("Saving projects...");
         projectService.saveAll(projects);
 
+        Authority adminAuthority = authorityService.save(new Authority("ROLE_ADMIN"));
+        Authority userAuthority = authorityService.save(new Authority("ROLE_USER"));
 
+        User adminUser = new User();
+        adminUser.setUsername("admin");
+        adminUser.setPassword(passwordEncoder.encode("password"));
+        adminUser.setFirstName("John");
+        adminUser.setLastName("Smith");
+        adminUser.setEnabled(true);
+        adminUser.setAuthorities(Arrays.asList(adminAuthority, userAuthority));
 
-        User user1 = new User();
-        user1.setUsername("jsmith");
-        user1.setFirstName("John");
-        user1.setLastName("Smith");
-        user1.setActive(1);
+        User regularUser = new User();
+        regularUser.setUsername("dEllis");
+        regularUser.setPassword(passwordEncoder.encode("password"));
+        regularUser.setFirstName("David");
+        regularUser.setLastName("Ellis");
+        regularUser.setEnabled(true);
+        regularUser.setAuthorities(Arrays.asList(userAuthority));
 
+        userService.save(adminUser);
+        userService.save(regularUser);
     }
 }
