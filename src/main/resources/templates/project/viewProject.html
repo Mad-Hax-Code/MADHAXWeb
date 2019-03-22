@@ -14,6 +14,7 @@
             <b>Repository: </b><a target="new" th:href="${project.repositoryURL}" th:text="${project.repositoryURL}"></a>
             <h3 style="color:darkorange;" th:if="${not project.features.isEmpty()}">Features</h3>
             <a class="add" style="font-size:1em;" th:href="@{/project/{projectId}/feature/new(projectId=${project.id})}">+ New Feature</a>
+            <div class="clr"></div>
             <ul th:if="${not project.features.isEmpty()}">
                 <li th:each="feature : ${project.features}">
                     <span style="font-weight:bold;" th:text="${feature.title}"></span>
