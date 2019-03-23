@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,31 +49,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         log.debug("Authenticating request.");
         http.
                 authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/project/new")
-//                .antMatchers("/project")
-                .authenticated().and().formLogin();
-//                .antMatchers("/login").permitAll()
-//                .antMatchers("/registration").permitAll()
-//                .antMatchers("/h2-console").permitAll()
-//                .antMatchers("//**").hasAuthority("ADMIN").anyRequest()
-//                .authenticated().and().csrf().disable().formLogin()
-//                .loginPage("/login").failureUrl("/login?error=true")
-//                .loginPage().permitAll()
-//                .defaultSuccessUrl("/index")
-//                .usernameParameter("email")
-//                .passwordParameter("password")
-//                .and().logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/").and().exceptionHandling();
+                .antMatchers("/project/new",
+                        "/project/edit",
+                        "/project/edit/*",
+                        "/project/delete",
+                        "/project/delete/*").hasRole("ADMIN")
+                .antMatchers("/project/note/new/*",
+                        "/project/note/edit",
+                        "/project/note/edit/**",
+                        "/project/note/delete",
+                        "/project/note/delete/**").hasRole("ADMIN")
+                .antMatchers("/project/feature/new/*",
+                        "/project/feature/edit",
+                        "/project/feature/edit/**",
+                        "/project/feature/delete",
+                        "/project/feature/delete/**").hasRole("ADMIN")
+                .antMatchers("/project/issue/new",
+                        "/project/issue/edit",
+                        "/project/issue/delete").hasAnyRole()
+                .antMatchers("/",
+                        "/project",
+                        "/project/*").permitAll()
+                .anyRequest().authenticated().and().formLogin();
     }
 
-//
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web
-//                .ignoring()
-//                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-//    }
+    @Override
+    public void configure(WebSecurity web) {
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/image/**");
+    }
 
 }
