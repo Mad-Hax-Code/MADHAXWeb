@@ -12,8 +12,8 @@
             <h2>Add/Edit Issue</h2>
             <!--/*@thymesVar id="issue" type="com.madhax.website.domain.Issue"*/-->
             <form th:action="${issue?.id > 0}
-            ? @{/project/{projectId}/issue/edit(projectId=${issue.project.id})}
-            : @{/project/{projectId}/issue/new(projectId=${projectId})}" th:object="${issue}" method="post">
+            ? @{/project/issue/edit/{projectId}(projectId=${issue.project.id})}
+            : @{/project/issue/new/{projectId}(projectId=${projectId})}" th:object="${issue}" method="post">
                 <input type="text" name="issueTitle" th:field="*{title}" placeholder="Project Name"/><br />
                 <select name="issueType" th:field="*{issueType}">
                     <option th:each="type : ${issueTypes}" th:value="${type.name()}" th:text="${type.name()}">val</option>

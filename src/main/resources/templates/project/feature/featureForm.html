@@ -11,8 +11,8 @@
         <div id="mainContent">
             <h2>Add/Edit Feature</h2>
             <form th:action="${feature?.id > 0}
-            ? @{/project/{projectId}/feature/edit(projectId=${feature.project.id})}
-            : @{/project/{projectId}/feature/new(projectId=${projectId})}" th:object="${feature}" method="post">
+            ? @{/project/feature/edit/{projectId}(projectId=${feature.project.id})}
+            : @{/project/feature/new/{projectId}(projectId=${projectId})}" th:object="${feature}" method="post">
                 <input type="text" name="issueTitle" th:field="*{title}" placeholder="Project Name"/><br />
                 <textarea type="text" name="issueBody" th:field="*{body}" placeholder="Project description."></textarea><br />
                 <input th:if="${feature.id > 0}" type="hidden" name="issueId" th:field="*{id}" />

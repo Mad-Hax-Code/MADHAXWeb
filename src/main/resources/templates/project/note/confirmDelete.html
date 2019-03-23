@@ -11,7 +11,7 @@
         <div id="mainContent">
             <h2>Delete Note</h2>
             <p>Are you sure you want to permanently delete the note: <span th:text="${note.title}"></span>?</p>
-            <form th:action="@{/project/{projectId}/note/delete(projectId=${note.getProject().getId()})}" method="post">
+            <form th:action="@{/project/note/delete/{projectId}(projectId=${note.getProject().getId()})}" method="post">
                 <input type="submit" name="submit" value="Yes, delete note" />
                 <input type="hidden" name="issueId" th:value="${note.id}" />
             </form>
