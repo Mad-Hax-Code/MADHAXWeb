@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "users")
 public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "username", unique = true)
@@ -19,10 +20,7 @@ public class User extends BaseEntity implements UserDetails {
     private String lastName;
     private Boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "user_authority",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    @ManyToMany
     private Collection<Authority> authorities;
 
     public User() { }
