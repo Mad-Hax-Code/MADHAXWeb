@@ -51,7 +51,7 @@ public class ProjectController {
         return PROJECT_FORM_URL;
     }
 
-    @GetMapping("/{projectId}/edit")
+    @GetMapping("/edit/{projectId}")
     public String editProject(Model model, @PathVariable Long projectId) {
         model.addAttribute("project", projectService.getById(projectId));
         return PROJECT_FORM_URL;
@@ -69,7 +69,7 @@ public class ProjectController {
         return "redirect:/project/" + savedProject.getId();
     }
 
-    @GetMapping("/{projectId}/delete")
+    @GetMapping("/delete/{projectId}")
     public String confirmDelete(@PathVariable Long projectId, Model model) {
         model.addAttribute("project", projectService.getById(projectId));
         return CONFIRM_DELETE_URL;

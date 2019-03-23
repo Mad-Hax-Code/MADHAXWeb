@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/project/{projectId}/feature")
+@RequestMapping("/project/feature")
 public class FeatureController {
 
     private final Logger log = LoggerFactory.getLogger(FeatureController.class);
@@ -27,14 +27,14 @@ public class FeatureController {
         this.featureService = featureService;
     }
 
-    @GetMapping("/new")
+    @GetMapping("/new/{projectId}")
     public String newFeature(Model model, @PathVariable Long projectId) {
         model.addAttribute("project", projectService.getById(projectId));
         model.addAttribute("feature", new Feature());
         return FEATURE_FORM_URL;
     }
 
-    @PostMapping("/new")
+    @PostMapping("/new/{projectId}")
     public String saveNewFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
         Project project = projectService.getById(projectId);
         project.addFeature(feature);
@@ -42,27 +42,27 @@ public class FeatureController {
         return "redirect:/project/" + project.getId();
     }
 
-    @GetMapping("/{featureId}/edit")
+    @GetMapping("/edit/{projectId}/{featureId}")
     public String editFeature(@PathVariable Long featureId, Model model) {
         model.addAttribute("feature", featureService.getById(featureId));
         return FEATURE_FORM_URL;
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/edit/{projectId}")
     public String saveEditedFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
         log.info("Updating feature ID: {} for project: {}", feature.getId(), projectId);
         Feature savedFeature = featureService.save(feature);
         return "redirect:/project/" + savedFeature.getProject().getId();
     }
 
-    @GetMapping("/{featureId}/delete")
+    @GetMapping("/delete/{projectId}/{featureId}")
     public String confirmDeleteById(@PathVariable Long featureId, Model model) {
         log.info("Delete confirmation for feature ID: {}", featureId);
         model.addAttribute("feature", featureService.getById(featureId));
         return CONFIRM_DELETE_URL;
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/delete/{projectId}")
     public String handleDeleteFeatureById(@PathVariable Long projectId, @RequestParam Long featureId) {
         log.info("Deleting feature id: {}", featureId);
         featureService.deleteById(featureId);

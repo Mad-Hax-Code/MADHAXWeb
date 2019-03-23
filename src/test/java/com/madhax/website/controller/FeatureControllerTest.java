@@ -61,7 +61,7 @@ public class FeatureControllerTest {
     @Test
     public void newFeature() throws Exception {
         when(projectService.getById(anyLong())).thenReturn(project);
-        mockMvc.perform(get("/project/1/feature/new/"))
+        mockMvc.perform(get("/project/feature/new/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(controller.FEATURE_FORM_URL))
                 .andExpect(model().attributeExists("project"));
@@ -71,13 +71,18 @@ public class FeatureControllerTest {
 
     @Test
     public void saveNewFeature() throws Exception {
+        when(featureService.save(any())).thenReturn(feature);
 
+        mockMvc.perform(post("project/feature/new/1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/project/1"));
+        verify(featureService, times(1)).save(any());
     }
 
     @Test
     public void editFeature() throws Exception {
         when(featureService.getById(anyLong())).thenReturn(feature);
-        mockMvc.perform(get("/project/1/feature/1/edit"))
+        mockMvc.perform(get("/project/feature/edit/1/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(controller.FEATURE_FORM_URL))
                 .andExpect(model().attributeExists("feature"));
@@ -89,7 +94,7 @@ public class FeatureControllerTest {
 
         when(featureService.save(any())).thenReturn(feature);
 
-        mockMvc.perform(post("/project/1/feature/edit"))
+        mockMvc.perform(post("/project/feature/edit/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));
 
@@ -101,7 +106,7 @@ public class FeatureControllerTest {
 
         when(featureService.getById(anyLong())).thenReturn(feature);
 
-        mockMvc.perform(get("/project/1/feature/1/delete"))
+        mockMvc.perform(get("/project/feature/delete/1/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(controller.CONFIRM_DELETE_URL))
                 .andExpect(model().attributeExists("feature"));
@@ -112,7 +117,7 @@ public class FeatureControllerTest {
     public void handleDeleteFeatureById() throws Exception {
 
         mockMvc.perform(
-                post("/project/1/feature/delete")
+                post("/project/feature/delete/1")
                     .param("featureId", "1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));

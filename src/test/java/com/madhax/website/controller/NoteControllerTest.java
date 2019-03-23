@@ -67,7 +67,7 @@ public class NoteControllerTest {
     @Test
     public void newIssue() throws Exception {
 
-        mockMvc.perform(get("/project/1/note/new"))
+        mockMvc.perform(get("/project/note/new/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(NOTE_FORM_URL))
                 .andExpect(model().attributeExists("projectId"))
@@ -80,7 +80,7 @@ public class NoteControllerTest {
         when(projectService.getById(anyLong())).thenReturn(project);
         when(projectService.save(any())).thenReturn(project);
 
-        mockMvc.perform(post("/project/1/note/new"))
+        mockMvc.perform(post("/project/note/new/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));
 
@@ -92,7 +92,7 @@ public class NoteControllerTest {
 
         when(noteService.getById(anyLong())).thenReturn(note1);
 
-        mockMvc.perform(get("/project/1/note/1/edit"))
+        mockMvc.perform(get("/project/note/edit/1/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(NOTE_FORM_URL))
                 .andExpect(model().attributeExists("note"));
@@ -103,7 +103,7 @@ public class NoteControllerTest {
     public void savedEditedNote() throws Exception {
         when(noteService.save(any())).thenReturn(note1);
 
-        mockMvc.perform(post("/project/1/note/edit"))
+        mockMvc.perform(post("/project/note/edit/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));
 
@@ -114,7 +114,7 @@ public class NoteControllerTest {
     public void confirmDeleteById() throws Exception {
         when(noteService.getById(anyLong())).thenReturn(note1);
 
-        mockMvc.perform(get("/project/1/note/1/delete"))
+        mockMvc.perform(get("/project/note/delete/1/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(CONFIRM_DELETE_URL))
                 .andExpect(model().attributeExists("note"));
@@ -126,7 +126,7 @@ public class NoteControllerTest {
     public void handleDeleteNoteById() throws Exception {
 
         mockMvc.perform(
-                post("/project/1/note/delete")
+                post("/project/note/delete/1")
                     .param("issueId", "1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));

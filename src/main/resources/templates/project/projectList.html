@@ -17,7 +17,7 @@
             <span th:each="project : ${projects}">
             <div class="projectList">
                 <div class="projectListTitle">
-                    <a th:href="'/project/' + ${project.id}"><span style="color:orange;" th:text="${project.name}">Project Title</span></a>
+                    <a th:href="@{/project/{projectId}(projectId=${project.id})}"><span style="color:orange;" th:text="${project.name}">Project Title</span></a>
                     <span style="font-style:italic;" th:text="${project.version}"></span>
                 </div>
                 <div class="projectListBody">
@@ -26,9 +26,9 @@
                         <li th:each="feature : ${project.features}"><span th:text="${feature.title}"></span></li>
                     </ul>
                     <div style="text-align: right;">
-                        <a th:href="'/project/' + ${project.id} + '/edit'">Edit</a> |
-                        <a th:href="'/project/' + ${project.id} + '/delete'">Delete</a> |
-                        <a th:href="'/project/' + ${project.id}">Project page</a>
+                        <a th:href="@{/project/edit/{projectId}(projectId=${project.id})}">Edit</a> |
+                        <a th:href="@{/project/delete/{projectId}(projectId=${project.id})}">Delete</a> |
+                        <a th:href="@{/project/{projectId}(projectId=${project.id})}">Project page</a>
                     </div>
                     <div class="clr"></div>
                 </div>
