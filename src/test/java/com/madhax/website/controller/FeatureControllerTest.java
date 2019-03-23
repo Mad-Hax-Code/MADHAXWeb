@@ -71,12 +71,15 @@ public class FeatureControllerTest {
 
     @Test
     public void saveNewFeature() throws Exception {
-        when(featureService.save(any())).thenReturn(feature);
 
-        mockMvc.perform(post("project/feature/new/1"))
+        when(projectService.getById(anyLong())).thenReturn(project);
+
+        mockMvc.perform(post("/project/feature/new/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));
-        verify(featureService, times(1)).save(any());
+
+        verify(projectService, times(1)).getById(anyLong());
+        verify(projectService, times(1)).save(any());
     }
 
     @Test
