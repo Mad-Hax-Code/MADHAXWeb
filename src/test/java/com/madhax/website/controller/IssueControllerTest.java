@@ -72,7 +72,7 @@ public class IssueControllerTest {
     @Test
     public void newIssue() throws Exception {
 
-        mockMvc.perform(get("/project/1/issue/new"))
+        mockMvc.perform(get("/project/issue/new/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ISSUE_FORM_URL))
                 .andExpect(model().attributeExists("issue"))
@@ -84,7 +84,7 @@ public class IssueControllerTest {
 
         when(projectService.getById(anyLong())).thenReturn(project);
 
-        mockMvc.perform(post("/project/1/issue/new"))
+        mockMvc.perform(post("/project/issue/new/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));
 
@@ -97,7 +97,7 @@ public class IssueControllerTest {
 
         when(issueService.getById(anyLong())).thenReturn(issue);
 
-        mockMvc.perform(get("/project/1/issue/1/edit"))
+        mockMvc.perform(get("/project/issue/edit/1/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ISSUE_FORM_URL))
                 .andExpect(model().attributeExists("issue"));
@@ -110,7 +110,7 @@ public class IssueControllerTest {
 
         when(issueService.save(any())).thenReturn(issue);
 
-        mockMvc.perform(post("/project/1/issue/edit"))
+        mockMvc.perform(post("/project/issue/edit/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));
 
@@ -122,7 +122,7 @@ public class IssueControllerTest {
 
         when(issueService.getById(anyLong())).thenReturn(issue);
 
-        mockMvc.perform(get("/project/1/issue/1/delete"))
+        mockMvc.perform(get("/project/issue/delete/1/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(CONFIRM_DELETE_URL))
                 .andExpect(model().attributeExists("issue"));
@@ -134,7 +134,7 @@ public class IssueControllerTest {
     public void handleDeleteIssueById() throws Exception {
 
         mockMvc.perform(
-                post("/project/1/issue/delete")
+                post("/project/issue/delete/1")
                         .param("issueId", "1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/project/1"));

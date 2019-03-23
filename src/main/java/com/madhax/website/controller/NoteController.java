@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/project/{projectId}/note")
+@RequestMapping("/project/note")
 public class NoteController {
 
     private final Logger log = LoggerFactory.getLogger(NoteController.class);
@@ -27,14 +27,14 @@ public class NoteController {
         this.noteService = noteService;
     }
 
-    @GetMapping("/new")
+    @GetMapping("/new/{projectId}")
     public String newIssue(@PathVariable Long projectId, Model model){
         model.addAttribute("note", new Note());
         model.addAttribute("projectId", projectId);
         return NOTE_FORM_URL;
     }
 
-    @PostMapping("/new")
+    @PostMapping("/new/{projectId}")
     public String saveNewNote(@PathVariable Long projectId, @ModelAttribute Note note) {
         Project project = projectService.getById((projectId));
         project.addNote(note);
@@ -42,27 +42,27 @@ public class NoteController {
         return "redirect:/project/" + project.getId();
     }
 
-    @GetMapping("/{noteId}/edit")
+    @GetMapping("/edit/{projectId}/{noteId}")
     public String editNote(@PathVariable Long noteId, Model model) {
         model.addAttribute("note", noteService.getById(noteId));
         return NOTE_FORM_URL;
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/edit/{projectId}")
     public String savedEditedNote(@ModelAttribute Note note, @PathVariable Long projectId) {
         log.debug("Updating note ID: {} for project: {}", note.getId(), projectId);
         Note savedNote = noteService.save(note);
         return "redirect:/project/" + projectId;
     }
 
-    @GetMapping("/{noteId}/delete")
+    @GetMapping("/delete/{projectId}/{noteId}")
     public String confirmDeleteById(@PathVariable Long noteId, Model model) {
         log.debug("Delete confirmation for note ID: {}", noteId);
         model.addAttribute("note", noteService.getById(noteId));
         return CONFIRM_DELETE_URL;
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/delete/{projectId}")
     public String handleDeleteNoteById(@RequestParam Long issueId, @PathVariable Long projectId) {
         log.debug("Deleting note with ID: {}", issueId);
         noteService.deleteById(issueId);

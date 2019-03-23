@@ -144,7 +144,7 @@ public class ProjectControllerTest {
 
         when(projectService.getById(anyLong())).thenReturn(project);
 
-        mockMvc.perform(get("/project/1/edit"))
+        mockMvc.perform(get("/project/edit/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(controller.PROJECT_FORM_URL))
                 .andExpect(model().attributeExists("project"));
@@ -155,7 +155,7 @@ public class ProjectControllerTest {
 
         when(projectService.getById(anyLong())).thenReturn(project);
 
-        mockMvc.perform(get("/project/1/delete"))
+        mockMvc.perform(get("/project/delete/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(controller.CONFIRM_DELETE_URL))
                 .andExpect(model().attributeExists("project"));
