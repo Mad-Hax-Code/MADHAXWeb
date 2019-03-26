@@ -9,7 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by James Cathcart on 2/22/2019
@@ -40,7 +43,12 @@ public class IssueController {
     }
 
     @PostMapping("/new/{projectId}")
-    public String saveNewIssue(@PathVariable Long projectId, @ModelAttribute Issue issue) {
+    public String saveNewIssue(@PathVariable Long projectId, @Valid @ModelAttribute Issue issue, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.error(objectError.toString()));
+            return ISSUE_FORM_URL;
+        }
         Project project = projectService.getById(projectId);
         project.addIssue(issue);
         projectService.save(project);
@@ -55,7 +63,12 @@ public class IssueController {
     }
 
     @PostMapping("/edit/{projectId}")
-    public String saveEditedIssue(@ModelAttribute Issue issue, @PathVariable Long projectId) {
+    public String saveEditedIssue(@Valid @ModelAttribute Issue issue, @PathVariable Long projectId, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+            return ISSUE_FORM_URL;
+        }
         log.debug("Updating issue ID: {} for project: {}", issue.getId(), projectId);
         Issue savedIssue = issueService.save(issue);
         return "redirect:/project/" + projectId;

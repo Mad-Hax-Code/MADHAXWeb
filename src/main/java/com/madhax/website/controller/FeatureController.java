@@ -8,7 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/project/feature")
@@ -35,7 +38,13 @@ public class FeatureController {
     }
 
     @PostMapping("/new/{projectId}")
-    public String saveNewFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
+    public String saveNewFeature(@Valid @ModelAttribute Feature feature, @PathVariable Long projectId, BindingResult bindingResult) {
+
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+            return FEATURE_FORM_URL;
+        }
         Project project = projectService.getById(projectId);
         project.addFeature(feature);
         projectService.save(project);
@@ -49,7 +58,12 @@ public class FeatureController {
     }
 
     @PostMapping("/edit/{projectId}")
-    public String saveEditedFeature(@ModelAttribute Feature feature, @PathVariable Long projectId) {
+    public String saveEditedFeature(@Valid @ModelAttribute Feature feature, @PathVariable Long projectId, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+            return FEATURE_FORM_URL;
+        }
         log.info("Updating feature ID: {} for project: {}", feature.getId(), projectId);
         Feature savedFeature = featureService.save(feature);
         return "redirect:/project/" + savedFeature.getProject().getId();
