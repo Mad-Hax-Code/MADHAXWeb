@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head th:replace="fragments/head.html :: head">
     <meta charset="UTF-8">
     <title>MADHAX Software</title>
@@ -10,7 +11,7 @@
     <div id="mainContainer">
         <div id="mainContent">
             <h2>Projects</h2>
-            <div class="projectList">
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class="projectList">
                 <a class="add" style="float:right;" th:href="'/project/new'">+</a>
                 <div class="clr"></div>
             </div>
@@ -26,8 +27,8 @@
                         <li th:each="feature : ${project.features}"><span th:text="${feature.title}"></span></li>
                     </ul>
                     <div style="text-align: right;">
-                        <a th:href="@{/project/edit/{projectId}(projectId=${project.id})}">Edit</a> |
-                        <a th:href="@{/project/delete/{projectId}(projectId=${project.id})}">Delete</a> |
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/project/edit/{projectId}(projectId=${project.id})}">Edit</a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/project/delete/{projectId}(projectId=${project.id})}">Delete</a>
                         <a th:href="@{/project/{projectId}(projectId=${project.id})}">Project page</a>
                     </div>
                     <div class="clr"></div>

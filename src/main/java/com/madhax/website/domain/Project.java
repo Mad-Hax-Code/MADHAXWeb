@@ -15,10 +15,10 @@ import java.util.Set;
 public class Project extends BaseEntity {
 
     @NotBlank
-    @Size(min = 3, max=255)
+    @Size(min = 3, max = 255)
     private String name;
 
-    @NotBlank
+    @Size(min = 3)
     @Lob
     private String description;
 

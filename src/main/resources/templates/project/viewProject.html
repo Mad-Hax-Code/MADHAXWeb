@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head th:replace="fragments/head.html :: head">
     <meta charset="UTF-8">
     <title>MADHAX Software</title>
@@ -13,33 +14,31 @@
             <p th:text="${project.description}"></p>
             <b>Repository: </b><a target="new" th:href="${project.repositoryURL}" th:text="${project.repositoryURL}"></a>
             <h3 style="color:darkorange;" th:if="${not project.features.isEmpty()}">Features</h3>
-            <a class="add" style="font-size:1em;" th:href="@{/project/feature/new/{projectId}(projectId=${project.id})}">+ New Feature</a>
+            <a  sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/project/feature/new/{projectId}(projectId=${project.id})}">+ New Feature</a>
             <ul th:if="${not project.features.isEmpty()}">
                 <li th:each="feature : ${project.features}">
                     <span style="font-weight:bold;" th:text="${feature.title}"></span>
                     <ul>
                         <li style="list-style: none;">
                             <span th:text="${feature.body}"></span>
-                            <a th:href="@{/project/feature/edit/{projectId}/{featureId}(projectId=${feature.project.id}, featureId=${feature.id})}">Edit</a>
-                            |
-                            <a th:href="@{/project/feature/delete/{projectId}/{featureId}(projectId=${feature.project.id}, featureId=${feature.id})}">Delete</a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/project/feature/edit/{projectId}/{featureId}(projectId=${feature.project.id}, featureId=${feature.id})}">Edit</a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/project/feature/delete/{projectId}/{featureId}(projectId=${feature.project.id}, featureId=${feature.id})}">Delete</a>
                         </li>
                     </ul>
                 </li>
             </ul>
             <h3 style="color:darkorange;" th:if="${not project.issues.isEmpty()}">Known Issues</h3>
-            <a class="add" style="font-size:1em;" th:href="@{/project/issue/new/{projectId}(projectId=${project.id})}">+ New Issue</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/project/issue/new/{projectId}(projectId=${project.id})}">+ New Issue</a>
             <ol th:if="${not project.issues.isEmpty()}">
                 <li th:each="issue : ${project.issues}">
-                    <span style="font-weight:bold;" th:text="${issue.title}"></span>
+                    <span style="font-weight:bold;" th:text="${issue.title + ' - ' + issue.getDate()}"></span>
                     <ul>
                         <li style="list-style: none;">
                             <span th:text="${issue.message}"></span>
-                            <a th:href="@{/project/issue/edit/{projectId}/{issueId}(projectId=${issue.project.id}, issueId=${issue.id})}">
+                            <a sec:authorize="isAuthenticated()" th:href="@{/project/issue/edit/{projectId}/{issueId}(projectId=${issue.project.id}, issueId=${issue.id})}">
                                 Edit
                             </a>
-                            |
-                            <a th:href="@{/project/issue/delete/{projectId}/{issueId}(projectId=${issue.project.id}, issueId=${issue.id})}">
+                            <a sec:authorize="isAuthenticated()" th:href="@{/project/issue/delete/{projectId}/{issueId}(projectId=${issue.project.id}, issueId=${issue.id})}">
                                 Delete
                             </a>
                         </li>
@@ -47,15 +46,15 @@
                 </li>
             </ol>
             <h3 style="color:darkorange;" th:if="${not project.notes.isEmpty()}">Development Log</h3>
-            <a class="add" style="font-size:1em;" th:href="@{/project/note/new/{projectId}(projectId=${project.id})}">+ New Note</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/project/note/new/{projectId}(projectId=${project.id})}">+ New Note</a>
             <ul>
                 <li th:each="note : ${project.notes}">
-                    <span style="font-weight:bold;" th:text="${note.title}"></span>
+                    <span style="font-weight:bold;" th:text="${note.title + ' - ' + note.getDate()}"></span>
                     <ul>
                         <li style="list-style: none;">
                             <span th:text="${note.message}"></span>
-                            <a th:href="@{/project/note/edit/{projectId}/{noteId}(projectId=${project.id}, noteId=${note.id})}">Edit</a> |
-                            <a th:href="@{/project/note/delete/{projectId}/{noteId}(projectId=${project.id}, noteId=${note.id})}">Delete</a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/project/note/edit/{projectId}/{noteId}(projectId=${project.id}, noteId=${note.id})}">Edit</a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/project/note/delete/{projectId}/{noteId}(projectId=${project.id}, noteId=${note.id})}">Delete</a>
                         </li>
                     </ul>
                 </li>

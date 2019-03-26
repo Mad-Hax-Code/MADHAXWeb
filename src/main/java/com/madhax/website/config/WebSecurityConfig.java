@@ -68,6 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/project/issue/edit",
                         "/project/issue/delete").hasAnyRole()
                 .antMatchers("/",
+                        "/about",
+                        "/contact",
                         "/project",
                         "/project/*").permitAll()
                 .anyRequest().authenticated().and().formLogin();
