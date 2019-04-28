@@ -63,7 +63,7 @@ public class FeatureServiceTest {
         Feature savedFeature = featureService.save(feature);
 
         assertEquals("Feature Title", savedFeature.getTitle());
-        verify(featureService, times(7)).save(any());
+        verify(featureService, times(1)).save(any());
     }
 
     @Test
