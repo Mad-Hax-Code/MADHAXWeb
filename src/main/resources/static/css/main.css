@@ -1,0 +1,55 @@
+#logoImage {
+    margin-left:3em;
+    height:60px;
+}
+
+.navbar {
+    background-color: #FFF;
+    padding:0;
+    border-bottom:1px solid #aaa;
+}
+
+.nav-link , .navbar-brand {
+    color: #000;
+    cursor: pointer;
+}
+
+.nav-link {
+    margin-right: 1em !important;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #e59842;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.navbar-toggler {
+    background-color: #FFF !important;
+}
+
+.header {
+    background-image: url('../image/work-dev-HD-bw.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay {
+    /*position: absolute;*/
+    height: 100%;
+    width: 100%;
+    /*left: 0;*/
+    /*top: 0;*/
+    background: rgba(244,244,244,0.8);
+}
+
+.description {
+    position: absolute;
+    top:30%;
+    margin: auto;
+    padding:2em;
+}

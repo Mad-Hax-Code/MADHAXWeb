@@ -68,6 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/project/issue/edit",
                         "/project/issue/delete").hasAnyRole()
                 .antMatchers("/",
+                        "/bstest",
                         "/about",
                         "/contact",
                         "/project",
